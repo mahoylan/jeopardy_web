@@ -1,2 +1,2 @@
 # jeopardy_web
-# TEST
+A Python project exploring the Jeopardy dataset
