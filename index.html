@@ -9,7 +9,7 @@
     <body>
         <header>
             <div>
-                <p>Heading/Title</p>
+                <p>Super interesting title</p>
             </div>
             <nav>
                 <ul>
@@ -129,8 +129,46 @@
                 </div>
                 <div>
                     <h2>Inspect and get familiar with the data</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum earum veritatis quaerat quod, quos quae dicta soluta corrupti pariatur natus iusto, dolore adipisci voluptatum odit saepe tempora fugiat corporis. Cumque!</p>
-                    <p>Rename columns, </p>
+                    <!-- <code>jeopardy_data.info()<br></code> -->
+                    <p>Rename columns, clean data, </p>
+                    <ol>
+                        <li>Rename columns</li>
+                        <li>Fix type for Air Date and Value columns</li>
+                        <li>Clean up the Category, Question and Answer columns</li>
+                    </ol>
+                    <div>
+                        <details>
+                            <summary>Show code</summary>
+                            <code>
+                                jeopardy_data.rename(columns={ <br>
+                                "Show Number": "show_number", <br>
+                                " Air Date": "air_date", <br>
+                                " Round": "round_type", <br>
+                                " Category": "category", <br>
+                                " Value": "value", <br>
+                                " Question": "question", <br>
+                                " Answer": "answer"}, inplace=True)
+                            </code> <br> <br>
+                            <code>
+                                jeopardy_data["air_date"] = pd.to_datetime(jeopardy_data["air_date"])
+                            </code> <br><br>
+                            <code>
+                                jeopardy_data.value = jeopardy_data["value"].replace("[$]", "", regex=True) <br>
+                                jeopardy_data.value = jeopardy_data["value"].replace("[,]", "", regex=True) <br>
+                                jeopardy_data.value = jeopardy_data["value"].replace("no value", "0", regex=True) <br>
+                                jeopardy_data.value = pd.to_numeric(jeopardy_data["value"])
+                            </code> <br><br>
+                            <code>
+                                jeopardy_data["category"] = jeopardy_data["category"].str.upper().str.strip() <br>
+                                jeopardy_data["question"] = jeopardy_data["question"].astype("string") <br>
+                                jeopardy_data["question"] = jeopardy_data["question"].str.lower().str.strip() <br>
+                                jeopardy_data["answer"] = jeopardy_data["answer"].astype("string") <br>
+                                jeopardy_data["answer"] = jeopardy_data["answer"].str.lower().str.strip() <br>
+                            </code>
+                        </details>
+                    </div>
+                    
+                    
                 </div>
             </section> <!--End intro-->
 

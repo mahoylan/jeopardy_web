@@ -23,6 +23,7 @@ header nav {
 
 header nav ul {
     display: flex;
+    list-style: none;
     background-color: rgb(219, 41, 174);
     justify-content: flex-end;
 }
