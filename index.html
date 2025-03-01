@@ -4,6 +4,12 @@
         <link rel="stylesheet" href="./resources/css/reset.css">
         <link rel="stylesheet" href="./resources/css/style.css">
         <title>TEST</title>
+        <!-- JavaScript -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/atom-one-dark.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/python.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        
     </head>
 
     <body>
@@ -215,33 +221,27 @@
                     <h2>Most common categories</h2>
                     <p>I chose to start with counting the 10 most frequent categories and took it from there</p>
                 </div>
-                
+
                 <div>
                     <details>
                         <summary>Show code</summary>
-                        <code>
-                            category_counts = jeopardy_data["category"].value_counts() <br>
-                            top_10_categories = category_counts.head(10)
-                        </code> <br><br>
-                        <code>
-                            top_10_colors = ["forestgreen", "springgreen", "orange", "peru", "coral", "cornflowerblue", "indigo", "plum", "hotpink", "dodgerblue"] <br><br>
-                            plt.figure(figsize=(11,3)) <br>
-                            plot_top_10 = plt.bar(top_10_categories.index, height = top_10_categories.values, align='center', color=top_10_colors, edgecolor="black") <br><br>
-                            
-                            for bar in plot_top_10: <br>
-                                <code class="indented_code">
-                                    <ul>
-                                        <li>yval = bar.get_height()</li>
-                                        <li>plt.text(bar.get_x() + bar.get_width()/2, yval+5, int(yval), ha="center", va="bottom", fontsize=10, fontweight="bold")</li>
-                                    </ul>
-                                </code>
-                            plt.title("Top 10 most frequent categories") <br>
-                            plt.xlabel("Category") <br>
-                            plt.ylabel("Frequency") <br>
-                            plt.ylim(top=650) <br>
-                            plt.xticks(rotation=45, ha="right") <br>
-                            plt.show()
-                        </code>
+                        <pre><code class="language-python">
+category_counts = jeopardy_data["category"].value_counts() 
+top_10_categories = category_counts.head(10)
+
+top_10_colors = ["forestgreen", "springgreen", "orange", "peru", "coral", "cornflowerblue", "indigo", "plum", "hotpink", "dodgerblue"]
+
+plt.figure(figsize=(11,3))
+plot_top_10 = plt.bar(top_10_categories.index, height = top_10_categories.values, align='center', color=top_10_colors, edgecolor="black")                            
+for bar in plot_top_10:
+    yval = bar.get_height()
+    plt.text(bar.get_x() + bar.get_width()/2, yval+5, int(yval), ha="center", va="bottom", fontsize=10, fontweight="bold")
+plt.title("Top 10 most frequent categories") 
+plt.xlabel("Category") 
+plt.ylabel("Frequency")
+plt.ylim(top=650) 
+plt.xticks(rotation=45, ha="right") 
+plt.show()</code></pre>
                     </details>
                     <img src="./resources/images/top_10_most_frequent_categories.svg" alt="">
                 </div>
