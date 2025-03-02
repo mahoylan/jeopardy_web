@@ -48,6 +48,7 @@
                         <li>Write a function that returns the count of the unique answers to all of the questions in a dataset.</li>
                     </ul>
                 </p>
+                <p>I will spend most of this page on displaying code and plots from the Analyze data project as a website about functions is rather dull, although I did some of that as well. See the bottom of the page.</p>
             </section><!-- End about-project -->
 
             <section class="set-up">
@@ -192,10 +193,7 @@ jeopardy_data["answer"] = jeopardy_data["answer"].astype("string")
 jeopardy_data["answer"] = jeopardy_data["answer"].str.lower().str.strip()
 
 print(jeopardy_data.info())
-jeopardy_data.head(5)
-                            </code></pre>
-                        </details>
-<samp><pre>
+
 &ltclass 'pandas.core.frame.DataFrame'>
 RangeIndex: 216930 entries, 0 to 216929
 Data columns (total 7 columns):
@@ -210,7 +208,11 @@ Data columns (total 7 columns):
     6   answer       216930 non-null  string        
 dtypes: datetime64[ns](1), int64(2), object(2), string(2)
 memory usage: 11.6+ MB
-</pre></samp>
+
+jeopardy_data.head(5)
+</code></pre> 
+                        </details>
+
                         <samp>
                         <table>
                             <thead>
@@ -922,7 +924,7 @@ plt.show()
 norway_as_answer = jeopardy_data[jeopardy_data.answer == "norway"]
 norway_as_answer_per_year = norway_as_answer.groupby(["air_year"], group_keys=True)[["answer"]].count()["answer"]
 
-norway_color_list = ["red"] + ["white"] + ["blue"]
+norway_color_list = ["red"] + ["white"] + ["blue"] #det er Norge i rødt, hvitt og blått
 
 fig = plt.figure(figsize=(10,4), tight_layout=True)
 plt.bar(norway_as_answer_per_year.index, norway_as_answer_per_year.values, color=norway_color_list, edgecolor="black")
@@ -1003,6 +1005,7 @@ norway_as_answer_prize = norway_as_answer.groupby(["value"], group_keys=True)[["
 
 fig = plt.figure(figsize=(13,5))
 plt.bar(norway_as_answer_prize.index, norway_as_answer_prize.values, width=70, color=norway_color_list, edgecolor="black")
+plt.annotate('Approximately 20.000 kr!', (3000, 1.5), xytext=(2250,10), fontsize=14, color='red', arrowprops=dict(arrowstyle="-|>", color="red")) #dollars to norwegian crowns conversion rate for 2005
 ax = plt.gca()
 ax.xaxis.set_major_formatter(mticker.FuncFormatter(lambda x, _: f"${int(x):,}".replace(",", ".")))
 plt.ylabel("Frequency")
