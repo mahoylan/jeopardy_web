@@ -54,14 +54,14 @@
                 <div>
                     <div>
                         <h2>Set up</h2>
-                        <p>Read in the data from csv into a pandas dataframe:</p>
+                        <p>Read in the data from .csv into a pandas dataframe and import relevant libraries</p>
                         <details>
                             <summary>Show code</summary>
 <pre><code class="language-python">
 import pandas as pd
 import numpy as np
 import re
-import matplotlib.colors as mcolors
+#import matplotlib.colors as mcolors
 import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
@@ -74,11 +74,10 @@ from scipy.stats import chi2_contingency
 plt.style.use('default')
 pd.set_option('display.max_colwidth', None)
 
-jeopardy_data = pd.read_csv('jeopardy.csv', na_filter=False)
+jeopardy_data = pd.read_csv('jeopardy.csv', na_filter=False)  #include na_filter=False to keep the "null" answers in "answer" column
 jeopardy_data.head(5)
 </code></pre>
                         </details>
-
                     </div>
                     <samp>
                     <table>
@@ -190,9 +189,28 @@ jeopardy_data["category"] = jeopardy_data["category"].str.upper().str.strip()
 jeopardy_data["question"] = jeopardy_data["question"].astype("string") 
 jeopardy_data["question"] = jeopardy_data["question"].str.lower().str.strip() 
 jeopardy_data["answer"] = jeopardy_data["answer"].astype("string") 
-jeopardy_data["answer"] = jeopardy_data["answer"].str.lower().str.strip() 
+jeopardy_data["answer"] = jeopardy_data["answer"].str.lower().str.strip()
+
+print(jeopardy_data.info())
+jeopardy_data.head(5)
                             </code></pre>
                         </details>
+<samp><pre>
+&ltclass 'pandas.core.frame.DataFrame'>
+RangeIndex: 216930 entries, 0 to 216929
+Data columns (total 7 columns):
+    #   Column       Non-Null Count   Dtype         
+---  ------       --------------   -----         
+    0   show_number  216930 non-null  int64         
+    1   air_date     216930 non-null  datetime64[ns]
+    2   round_type   216930 non-null  object        
+    3   category     216930 non-null  object        
+    4   value        216930 non-null  int64         
+    5   question     216930 non-null  string        
+    6   answer       216930 non-null  string        
+dtypes: datetime64[ns](1), int64(2), object(2), string(2)
+memory usage: 11.6+ MB
+</pre></samp>
                         <samp>
                         <table>
                             <thead>
@@ -312,7 +330,6 @@ jeopardy_data["answer"] = jeopardy_data["answer"].str.lower().str.strip()
                                 <li>See if there's a correlation between answer length and question value.</li>
                             </ul>
                         </ol>
-
                     </p>
                 </div>
             </section> <!--End brainstorm-->
@@ -327,16 +344,20 @@ jeopardy_data["answer"] = jeopardy_data["answer"].str.lower().str.strip()
                     <details>
                         <summary>Show code</summary>
 <pre><code class="language-python">
-category_counts = jeopardy_data["category"].value_counts() 
+#count the values in category column, returns a pandas series sorted after heighest count
+category_counts = jeopardy_data["category"].value_counts()
+#extract only the first 10 from the series
 top_10_categories = category_counts.head(10)
+#extract the name of the categories as an array
 top_10_categories_list = top_10_categories.index.to_numpy()
 
+#pick 10 nice colors for the top 10 occurring categories
 top_10_colors = ["forestgreen", "springgreen", "orange", "peru", "coral", "cornflowerblue", "indigo", "plum", "hotpink", "dodgerblue"]
 
 plt.figure(figsize=(11,3))
 plot_top_10 = plt.bar(top_10_categories.index, height = top_10_categories.values, align='center', color=top_10_colors, edgecolor="black")                            
 for bar in plot_top_10:
-    yval = bar.get_height()
+    yval = bar.get_height() #find y-value
     plt.text(bar.get_x() + bar.get_width()/2, yval+5, int(yval), ha="center", va="bottom", fontsize=10, fontweight="bold")
 plt.title("Top 10 most frequent categories") 
 plt.xlabel("Category") 
@@ -397,7 +418,122 @@ color_labels = top_10_colors + remaining_colors
 category_counts_filtered_sorted["Color label"] = color_labels
 
 top_100_categories = category_counts_filtered_sorted.head(100)
+top_100_categories.head(11)
+</code></pre>
+                    </details>
+                    <samp>
+                        <table>
+                            <thead>
+                                <tr> <!-- Header row  -->
+                                    <th scope="col">category</th>
+                                    <th scope="col"> Jeopardy!</th>
+                                    <th scope="col">Double Jeopardy!</th>
+                                    <th scope="col">Final Jeopardy!</th>
+                                    <th scope="col">Total Appearances</th>
+                                    <th scope="col">Color label</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr> <!-- 1. row  -->
+                                    <td>BEFORE & AFTER</td>
+                                    <td>97</td>
+                                    <td>450</td>
+                                    <td>0</td>
+                                    <td>547</td>
+                                    <td>forestgreen</td>
+                                </tr>
+                                <tr> <!-- 2. row  -->
+                                    <td>SCIENCE</td>
+                                    <td>217</td>
+                                    <td>296</td>
+                                    <td>6</td>
+                                    <td>519</td>
+                                    <td>springgreen</td>
+                                </tr>
+                                <tr> <!-- 3. row  -->
+                                    <td>LITERATURE</td>
+                                    <td>105</td>
+                                    <td>381</td>
+                                    <td>10</td>
+                                    <td>496</td>
+                                    <td>orange</td>
+                                </tr>
+                                <tr> <!-- 4. row  -->
+                                    <td>AMERICAN HISTORY</td>
+                                    <td>227</td>
+                                    <td>174</td>
+                                    <td>17</td>
+                                    <td>418</td>
+                                    <td>peru</td>
+                                </tr>
+                                <tr> <!-- 5. row  -->
+                                    <td>POTPOURRI</td>
+                                    <td>255</td>
+                                    <td>146</td>
+                                    <td>0</td>
+                                    <td>401</td>
+                                    <td>coral</td>
+                                </tr>
+                                <tr> <!-- 6. row  -->
+                                    <td>WORLD HISTORY</td>
+                                    <td>129</td>
+                                    <td>237</td>
+                                    <td>11</td>
+                                    <td>377</td>
+                                    <td>cornflowerblue</td>
+                                </tr>
+                                <tr> <!-- 7. row  -->
+                                    <td>WORD ORIGINS</td>
+                                    <td>145</td>
+                                    <td>192</td>
+                                    <td>34</td>
+                                    <td>371</td>
+                                    <td>indigo</td>
+                                </tr>
+                                <tr> <!-- 8. row  -->
+                                    <td>COLLEGES & UNIVERSITIES</td>
+                                    <td>125</td>
+                                    <td>220</td>
+                                    <td>6</td>
+                                    <td>351</td>
+                                    <td>plum</td>
+                                </tr>
+                                <tr> <!-- 9. row  -->
+                                    <td>HISTORY</td>
+                                    <td>155</td>
+                                    <td>194</td>
+                                    <td>0</td>
+                                    <td>349</td>
+                                    <td>hotpink</td>
+                                </tr>
+                                <tr> <!-- 10. row  -->
+                                    <td>SPORTS</td>
+                                    <td>253</td>
+                                    <td>81</td>
+                                    <td>8</td>
+                                    <td>342</td>
+                                    <td>dodgerblue</td>
+                                </tr>
+                                <tr> <!-- 11. row  -->
+                                    <td>U.S. CITIES</td>
+                                    <td>195</td>
+                                    <td>125</td>
+                                    <td>19</td>
+                                    <td>339</td>
+                                    <td>lightgray</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </samp>
 
+                    <details>
+                        <summary>Show code</summary>
+<pre><code class="language-python">
 #make a plot of the 3 round types with their top 100 occurring categories
 top_100_sorted_jeopardy = top_100_categories.sort_values(by=['Jeopardy!'], ascending=False)
 top_100_sorted_double = top_100_categories.sort_values(by=["Double Jeopardy!"], ascending=False)
@@ -412,19 +548,19 @@ for i, round_type in enumerate(top_100_cat_variables_list):
     plt.subplot(3,1,i+1)
     legend_patches = []
     subplot = plt.bar(top_100_cat_variables_list[i].iloc[:,i].index, \
-                      top_100_cat_variables_list[i].iloc[:,i].values, color=top_100_cat_variables_list[i].iloc[:,4])
-    max_height = 0
+                        top_100_cat_variables_list[i].iloc[:,i].values, color=top_100_cat_variables_list[i].iloc[:,4])
+    max_height = 0 #to adjust the y-axis for each subplot
     for bar in subplot:
         if bar.get_height() > max_height:
-            max_height = bar.get_height()
-        xlabels = [tick.get_text() for tick in plt.gca().get_xticklabels()]
+            max_height = bar.get_height() #find and save the highest y in each subplot
+        xlabels = [tick.get_text() for tick in plt.gca().get_xticklabels()] #extracts the text labels from the x-axis tick labels of the current subplot
         category_index = round(bar.get_x())
         if 0 <= category_index <= len(xlabels):
             category_name = xlabels[category_index]
-            if category_name in list(top_10_categories_list) and bar.get_height() > 0:
+            if category_name in list(top_10_categories_list) and bar.get_height() > 0: #make a legend patch if the current category is in top 10 list and if the current round has a question in that category
                 patch = mpatches.Patch(color=bar.get_facecolor(), label=category_name)
                 legend_patches.append(patch)
-        plt.ylim((0, max_height + (max_height*20/100)))
+        plt.ylim((0, max_height + (max_height*20/100))) #increase y-axis by 20% in each subplot
     plt.legend(handles=legend_patches, title=f"{len(legend_patches)} most frequent categories", loc="upper right", fontsize="small")
     plt.title(f"Round type: {top_100_cat_variables_list[i].iloc[:,i].name}", fontsize=15, pad=10)
     plt.xticks(rotation=90, fontsize=11)
@@ -432,7 +568,6 @@ for i, round_type in enumerate(top_100_cat_variables_list):
     plt.subplots_adjust(hspace=1.125, left=0.06, right=0.9)
 
 plt.show()
-
 </code></pre>
                     </details>
                     <img src="./resources/images/top_100_categories_each_round_legend_web.svg" alt="">
