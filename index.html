@@ -4,7 +4,7 @@
         <link rel="stylesheet" href="./resources/css/reset.css">
         <link rel="stylesheet" href="./resources/css/style.css">
         <title>TEST</title>
-        <!-- JavaScript -->
+        <!-- JavaScript https://highlightjs.org/demo https://cdnjs.com/libraries/highlight.js--> 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/atom-one-dark.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/python.min.js"></script>
@@ -29,7 +29,7 @@
         </header>
 
         <main>
-            <section>
+            <section class="about-project">
                 <h2>About project header</h2>
                 <p>In following the <a href="https://www.codecademy.com/learn/paths/data-science-foundations">Data Science Foundation Skill Path</a> at <a href="https://www.codecademy.com/">Codecademy</a> I was tasked to test my newly learned data manipulation skills by exploring a datset with Jeopardy data. But before I could get started, Codecademy sent me to another course to learn <a href="https://www.codecademy.com/learn/practical-data-cleaning">how to clean data with Python</a> and down yet another skill path to <a href="https://www.codecademy.com/learn/paths/analyze-data-with-python">learn to analyze data with Python</a>. The last task in the Analyze data with Python skill path was to create a portfolio project, using Python and a dataset of my own choice. And thus I chose the jeopardy dataset <a href="jeopardy_csv.zip">(found here)</a>, hitting two birds with one stone. Even though I could have exported the Jupyter Notebook as a html-file, I chose to build this page from scratch using what I've learned about <a href="https://www.codecademy.com/learn/paths/learn-how-to-build-websites">HTML and CSS</a>.</p>
                 <p>The goals for the analyze data project was
@@ -48,19 +48,39 @@
                         <li>Write a function that returns the count of the unique answers to all of the questions in a dataset.</li>
                     </ul>
                 </p>
-            </section>
+            </section><!-- End about-project -->
 
-            <section class="intro">
+            <section class="set-up">
                 <div>
                     <div>
                         <h2>Set up</h2>
                         <p>Read in the data from csv into a pandas dataframe:</p>
-                        <code>
-                            import pandas as pd <br>
-                            jeopardy_data = pd.read_csv('jeopardy.csv', na_filter=False)<br>
-                            jeopardy_data.head()
-                        </code>
+                        <details>
+                            <summary>Show code</summary>
+<pre><code class="language-python">
+import pandas as pd
+import numpy as np
+import re
+import matplotlib.colors as mcolors
+import matplotlib.patches as mpatches
+import matplotlib.pyplot as plt
+import matplotlib.ticker as mticker
+#import seaborn as sns
+from matplotlib.lines import Line2D
+from scipy.stats import chi2_contingency
+#from scipy.stats import ttest_ind
+    
+%matplotlib inline
+plt.style.use('default')
+pd.set_option('display.max_colwidth', None)
+
+jeopardy_data = pd.read_csv('jeopardy.csv', na_filter=False)
+jeopardy_data.head(5)
+</code></pre>
+                        </details>
+
                     </div>
+                    <samp>
                     <table>
                         <thead>
                             <tr> <!-- Header row  -->
@@ -80,50 +100,50 @@
                                 <td>4680</td>
                                 <td>2004-12-31</td>
                                 <td>Jeopardy!</td>
-                                <td>"HISTORY"</td>
-                                <td>"$200"</td>
-                                <td>"For the last 8 years of his life, Galileo was under house arrest for espousing this man's theory"</td>
-                                <td>"Copernicus"</td>
+                                <td>HISTORY</td>
+                                <td>$200</td>
+                                <td>For the last 8 years of his life, Galileo was under house arrest for espousing this man's theory</td>
+                                <td>Copernicus</td>
                             </tr>
                             <tr> <!-- 3. row  -->
                                 <td>1</td>
                                 <td>4680</td>
                                 <td>2004-12-31</td>
                                 <td>Jeopardy!</td>
-                                <td>"ESPN's TOP 10 ALL-TIME ATHLETES"</td>
-                                <td>"$200"</td>
-                                <td>"No. 2: 1912 Olympian; football star at Carlisle Indian School; 6 MLB seasons with the Reds, Giants & Braves"</td>
-                                <td>"Jim Thorpe"</td>
+                                <td>ESPN's TOP 10 ALL-TIME ATHLETES</td>
+                                <td>$200</td>
+                                <td>No. 2: 1912 Olympian; football star at Carlisle Indian School; 6 MLB seasons with the Reds, Giants & Braves</td>
+                                <td>Jim Thorpe</td>
                             </tr>
                             <tr> <!-- 4. row  -->
                                 <td>2</td>
                                 <td>4680</td>
                                 <td>2004-12-31</td>
                                 <td>Jeopardy!</td>
-                                <td>"EVERYBODY TALKS ABOUT IT..."</td>
-                                <td>"$200"</td>
-                                <td>"The city of Yuma in this state has a record average of 4,055 hours of sunshine each year"</td>
-                                <td>"Arizona"</td>
+                                <td>EVERYBODY TALKS ABOUT IT...</td>
+                                <td>$200</td>
+                                <td>The city of Yuma in this state has a record average of 4,055 hours of sunshine each year</td>
+                                <td>Arizona</td>
                             </tr>
                             <tr> <!-- 5. row  -->
                                 <td>3</td>
                                 <td>4680</td>
                                 <td>2004-12-31</td>
                                 <td>Jeopardy!</td>
-                                <td>"THE COMPANY LINE"</td>
-                                <td>"$200"</td>
-                                <td>"In 1963, live on ""The Art Linkletter Show"", this company served its billionth burger"</td>
-                                <td>"McDonald's"</td>
+                                <td>THE COMPANY LINE</td>
+                                <td>$200</td>
+                                <td>In 1963, live on "The Art Linkletter Show", this company served its billionth burger</td>
+                                <td>McDonald's</td>
                             </tr>
                             <tr> <!-- 6. row  -->
                                 <td>4</td>
                                 <td>4680</td>
                                 <td>2004-12-31</td>
                                 <td>Jeopardy!</td>
-                                <td>"EPITAPHS & TRIBUTES"</td>
-                                <td>"$200"</td>
-                                <td>"Signer of the Dec. of Indep., framer of the Constitution of Mass., second President of the United States"</td>
-                                <td>"John Adams"</td>
+                                <td>EPITAPHS & TRIBUTES</td>
+                                <td>$200</td>
+                                <td>Signer of the Dec. of Indep., framer of the Constitution of Mass., second President of the United States</td>
+                                <td>John Adams</td>
                             </tr>
                         </tbody>
                         <tfoot>
@@ -132,7 +152,11 @@
                             </tr>
                         </tfoot>
                     </table>
+                </samp>
                 </div>
+            </section> <!--End set-up-->
+
+            <section class="clean-prepare">
                 <div>
                     <h2>Clean and prepare data</h2>
                     <!-- <code>jeopardy_data.info()<br></code> -->
@@ -144,37 +168,114 @@
                     <div>
                         <details>
                             <summary>Show code</summary>
-                            <code>
-                                jeopardy_data.rename(columns={ <br>
-                                "Show Number": "show_number", <br>
-                                " Air Date": "air_date", <br>
-                                " Round": "round_type", <br>
-                                " Category": "category", <br>
-                                " Value": "value", <br>
-                                " Question": "question", <br>
-                                " Answer": "answer"}, inplace=True)
-                            </code> <br> <br>
-                            <code>
-                                jeopardy_data["air_date"] = pd.to_datetime(jeopardy_data["air_date"])
-                            </code> <br><br>
-                            <code>
-                                jeopardy_data.value = jeopardy_data["value"].replace("[$]", "", regex=True) <br>
-                                jeopardy_data.value = jeopardy_data["value"].replace("[,]", "", regex=True) <br>
-                                jeopardy_data.value = jeopardy_data["value"].replace("no value", "0", regex=True) <br>
-                                jeopardy_data.value = pd.to_numeric(jeopardy_data["value"])
-                            </code> <br><br>
-                            <code>
-                                jeopardy_data["category"] = jeopardy_data["category"].str.upper().str.strip() <br>
-                                jeopardy_data["question"] = jeopardy_data["question"].astype("string") <br>
-                                jeopardy_data["question"] = jeopardy_data["question"].str.lower().str.strip() <br>
-                                jeopardy_data["answer"] = jeopardy_data["answer"].astype("string") <br>
-                                jeopardy_data["answer"] = jeopardy_data["answer"].str.lower().str.strip() <br>
-                            </code>
+<pre><code class="language-python">
+jeopardy_data.rename(columns={ 
+"Show Number": "show_number", 
+" Air Date": "air_date", 
+" Round": "round_type", 
+" Category": "category", 
+" Value": "value", 
+" Question": "question", 
+" Answer": "answer"}, inplace=True)
+
+jeopardy_data["air_date"] = pd.to_datetime(jeopardy_data["air_date"])
+jeopardy_data["air_year"] = jeopardy_data["air_date"].dt.year
+
+jeopardy_data.value = jeopardy_data["value"].replace("[$]", "", regex=True) 
+jeopardy_data.value = jeopardy_data["value"].replace("[,]", "", regex=True) 
+jeopardy_data.value = jeopardy_data["value"].replace("no value", "0", regex=True) 
+jeopardy_data.value = pd.to_numeric(jeopardy_data["value"])
+
+jeopardy_data["category"] = jeopardy_data["category"].str.upper().str.strip() 
+jeopardy_data["question"] = jeopardy_data["question"].astype("string") 
+jeopardy_data["question"] = jeopardy_data["question"].str.lower().str.strip() 
+jeopardy_data["answer"] = jeopardy_data["answer"].astype("string") 
+jeopardy_data["answer"] = jeopardy_data["answer"].str.lower().str.strip() 
+                            </code></pre>
                         </details>
+                        <samp>
+                        <table>
+                            <thead>
+                                <tr> <!-- Header row  -->
+                                    <th></th>
+                                    <th scope="col">show_number</th>
+                                    <th scope="col"> air_date</th>
+                                    <th scope="col"> air_year</th>
+                                    <th scope="col"> round_type</th>
+                                    <th scope="col"> category</th>
+                                    <th scope="col"> value</th>
+                                    <th scope="col"> question</th>
+                                    <th scope="col"> answer</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr> <!-- 2. row  -->
+                                    <td>0</td>
+                                    <td>4680</td>
+                                    <td>2004-12-31</td>
+                                    <td>2004</td>
+                                    <td>Jeopardy!</td>
+                                    <td>HISTORY</td>
+                                    <td>200</td>
+                                    <td>for the last 8 years of his life, galileo was under house arrest for espousing this man's theory</td>
+                                    <td>copernicus</td>
+                                </tr>
+                                <tr> <!-- 3. row  -->
+                                    <td>1</td>
+                                    <td>4680</td>
+                                    <td>2004-12-31</td>
+                                    <td>2004</td>
+                                    <td>Jeopardy!</td>
+                                    <td>ESPN's TOP 10 ALL-TIME ATHLETES</td>
+                                    <td>200</td>
+                                    <td>no. 2: 1912 olympian; football star at carlisle indian school; 6 mlb seasons with the reds, giants & braves</td>
+                                    <td>jim thorpe</td>
+                                </tr>
+                                <tr> <!-- 4. row  -->
+                                    <td>2</td>
+                                    <td>4680</td>
+                                    <td>2004-12-31</td>
+                                    <td>2004</td>
+                                    <td>Jeopardy!</td>
+                                    <td>EVERYBODY TALKS ABOUT IT...</td>
+                                    <td>200</td>
+                                    <td>the city of yuma in this state has a record average of 4,055 hours of sunshine each year</td>
+                                    <td>arizona</td>
+                                </tr>
+                                <tr> <!-- 5. row  -->
+                                    <td>3</td>
+                                    <td>4680</td>
+                                    <td>2004-12-31</td>
+                                    <td>2004</td>
+                                    <td>Jeopardy!</td>
+                                    <td>THE COMPANY LINE</td>
+                                    <td>200</td>
+                                    <td>in 1963, live on "the art linkletter show", this company served its billionth burger</td>
+                                    <td>mcdonald's</td>
+                                </tr>
+                                <tr> <!-- 6. row  -->
+                                    <td>4</td>
+                                    <td>4680</td>
+                                    <td>2004-12-31</td>
+                                    <td>2004</td>
+                                    <td>Jeopardy!</td>
+                                    <td>EPITAPHS & TRIBUTES</td>
+                                    <td>200</td>
+                                    <td>signer of the dec. of indep., framer of the constitution of mass., second president of the united states</td>
+                                    <td>john adams</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </samp>
                     </div>
                 </div>
-            </section> <!--End intro-->
-
+            </section><!-- End clean-prepare -->
+                
             <section class="brainstorm">
                 <div>
                     <h2>Brainstorm analytical ideas with ChatGPT</h2>
@@ -225,9 +326,10 @@
                 <div>
                     <details>
                         <summary>Show code</summary>
-                        <pre><code class="language-python">
+<pre><code class="language-python">
 category_counts = jeopardy_data["category"].value_counts() 
 top_10_categories = category_counts.head(10)
+top_10_categories_list = top_10_categories.index.to_numpy()
 
 top_10_colors = ["forestgreen", "springgreen", "orange", "peru", "coral", "cornflowerblue", "indigo", "plum", "hotpink", "dodgerblue"]
 
@@ -245,9 +347,577 @@ plt.show()</code></pre>
                     </details>
                     <img src="./resources/images/top_10_most_frequent_categories.svg" alt="">
                 </div>
-
             </section> <!--End common_categories-->
 
+            <section class="rounds-overlapping-categories">
+                <div>
+                    <h3>What categories are most predominant in the different rounds of Jeopardy?</h3>
+                </div>
+                <div>
+                    <details>
+                        <summary>Show code</summary>
+<pre><code class="language-python">
+print("Types of round:", jeopardy_data.round_type.unique())
+</code></pre>
+<samp>Types of round: ['Jeopardy!' 'Double Jeopardy!' 'Final Jeopardy!' 'Tiebreaker']</samp>
+<pre><code class="language-python">
+jeopardy_round = jeopardy_data[jeopardy_data.round_type == "Jeopardy!"]
+double_jeopardy_round = jeopardy_data[jeopardy_data.round_type == "Double Jeopardy!"]
+final_jeopardy_round = jeopardy_data[jeopardy_data.round_type == "Final Jeopardy!"]
+# jeopardy_data_round_tiebreaker = jeopardy_data[jeopardy_data.round_type == "Tiebreaker"]
+
+jeopardy_round_category_count = jeopardy_round["category"].value_counts()
+double_jeopardy_round_category_count = double_jeopardy_round["category"].value_counts()
+final_jeopardy_round_category_count = final_jeopardy_round["category"].value_counts()
+
+jeopardy_categories = set(jeopardy_round_category_count.index)
+double_jeopardy_categories = set(double_jeopardy_round_category_count.index)
+final_jeopardy_categories = set(final_jeopardy_round_category_count.index)
+
+shared_jeopardy_double = jeopardy_categories & double_jeopardy_categories
+shared_jeopardy_final = jeopardy_categories & final_jeopardy_categories
+shared_double_final = double_jeopardy_categories & final_jeopardy_categories
+
+shared_across_two_or_more = shared_jeopardy_double | shared_jeopardy_final | shared_double_final
+
+category_counts_df = pd.DataFrame({
+    "Jeopardy!": jeopardy_round_category_count,
+    "Double Jeopardy!": double_jeopardy_round_category_count,
+    "Final Jeopardy!": final_jeopardy_round_category_count,
+}).fillna(0).astype(int)
+
+category_counts_df["Total Appearances"] = category_counts_df.sum(axis=1)
+
+category_counts_filtered = category_counts_df[(category_counts_df > 0).sum(axis=1) > 2]
+category_counts_filtered_sorted = category_counts_filtered.sort_values(by=['Total Appearances'], ascending=False)
+
+#add a new column with colors for the top 10 categories, lightgray for the rest
+remaining_colors = ["lightgray"]*(len(category_counts_filtered_sorted) - len(top_10_colors))
+color_labels = top_10_colors + remaining_colors
+category_counts_filtered_sorted["Color label"] = color_labels
+
+top_100_categories = category_counts_filtered_sorted.head(100)
+
+#make a plot of the 3 round types with their top 100 occurring categories
+top_100_sorted_jeopardy = top_100_categories.sort_values(by=['Jeopardy!'], ascending=False)
+top_100_sorted_double = top_100_categories.sort_values(by=["Double Jeopardy!"], ascending=False)
+top_100_sorted_final = top_100_categories.sort_values(by=["Final Jeopardy!"], ascending=False)
+top_100_cat_variables_list = [top_100_sorted_jeopardy, top_100_sorted_double, top_100_sorted_final]
+
+fig = plt.figure(figsize=(18,18), facecolor='lightgray')
+fig.suptitle("Top 100 Categories in the TV show Jeopardy!\n 10 most frequent categories colorized", fontsize=22, y=0.96)
+fig.supylabel("Frequency", fontsize=13)
+
+for i, round_type in enumerate(top_100_cat_variables_list):
+    plt.subplot(3,1,i+1)
+    legend_patches = []
+    subplot = plt.bar(top_100_cat_variables_list[i].iloc[:,i].index, \
+                      top_100_cat_variables_list[i].iloc[:,i].values, color=top_100_cat_variables_list[i].iloc[:,4])
+    max_height = 0
+    for bar in subplot:
+        if bar.get_height() > max_height:
+            max_height = bar.get_height()
+        xlabels = [tick.get_text() for tick in plt.gca().get_xticklabels()]
+        category_index = round(bar.get_x())
+        if 0 <= category_index <= len(xlabels):
+            category_name = xlabels[category_index]
+            if category_name in list(top_10_categories_list) and bar.get_height() > 0:
+                patch = mpatches.Patch(color=bar.get_facecolor(), label=category_name)
+                legend_patches.append(patch)
+        plt.ylim((0, max_height + (max_height*20/100)))
+    plt.legend(handles=legend_patches, title=f"{len(legend_patches)} most frequent categories", loc="upper right", fontsize="small")
+    plt.title(f"Round type: {top_100_cat_variables_list[i].iloc[:,i].name}", fontsize=15, pad=10)
+    plt.xticks(rotation=90, fontsize=11)
+    plt.xlim((-1,100))
+    plt.subplots_adjust(hspace=1.125, left=0.06, right=0.9)
+
+plt.show()
+
+</code></pre>
+                    </details>
+                    <img src="./resources/images/top_100_categories_each_round_legend_web.svg" alt="">
+                </div>
+            </section> <!--End rounds-overlapping-categories -->
+            <section class="prize-distribution">
+                <div>
+                    <h3>Is there a difference in the prize value between the round types Jeopardy and Double Jeopardy?</h3>
+                </div>
+                <div>
+                    <details>
+                        <summary>Show code</summary>
+<pre><code class="language-python">
+overlapping_categories_jeopardy_double = jeopardy_data[jeopardy_data["category"].isin(shared_jeopardy_double)]
+
+jeopardy_categories_prize = overlapping_categories_jeopardy_double[overlapping_categories_jeopardy_double.round_type == "Jeopardy!"]
+double_categories_prize = overlapping_categories_jeopardy_double[overlapping_categories_jeopardy_double.round_type == "Double Jeopardy!"]
+
+fig = plt.figure(figsize=(16,10), tight_layout=True) 
+fig.suptitle("Prize distribution of the top 10 occurring categories\n for the round types Jeopardy and Double Jeopardy", fontsize=20, y=1)
+fig.supylabel("Prize value", fontsize=15)
+for i, category in enumerate(top_10_categories_list, start=1):
+    plt.subplot(2,5,i)
+    plt.boxplot([jeopardy_categories_prize[jeopardy_categories_prize.category == category]["value"].to_numpy(), \
+                 double_categories_prize[double_categories_prize.category == category]["value"].to_numpy()], \
+                vert=True, widths=0.6, showmeans=True, meanline=True, tick_labels=("Jeopardy!", "Double Jeopardy!"))
+    ax = plt.gca()
+    ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda x, _: f"${int(x):,}".replace(",", ".")))
+    legend_elements = [
+                    Line2D([0], [0], color="darkorange", label="Median"),
+                    Line2D([0], [0], color="green", linestyle="--", label="Mean")]
+    plt.legend(handles=legend_elements, loc="upper left")
+    plt.title(f"Category: {category}", fontsize=12)
+plt.show()
+</code></pre>
+                    </details>
+                    <img src="./resources/images/top_10_categories_prize_distribution_round_web.svg" alt="">
+                </div>
+                <div>
+                    <h3>Is there a difference in the prize mean and median between the two round types?</h3>
+                </div>
+                <div>
+                    <details>
+                        <summary>Show code</summary>
+<pre><code class="language-python">
+category_prize_table_mean = []
+category_prize_table_median = []
+    
+for category in top_10_categories_list:
+    prize_list_mean = []
+    prize_list_median = []
+    for round_type in list(["Jeopardy!", "Double Jeopardy!"]):
+    prize = jeopardy_data[(jeopardy_data.category == category) & (jeopardy_data.round_type == round_type)]["value"].to_numpy()
+    prize_mean = np.mean(prize)
+    prize_median = np.median(prize)
+    prize_list_mean.append(prize_mean)
+    prize_list_median.append(prize_median)
+    category_prize_table_mean.append(prize_list_mean)
+    category_prize_table_median.append(prize_list_median)
+    
+chi2_category_prize_mean = chi2_contingency(category_prize_table_mean)
+chi2_category_prize_median = chi2_contingency(category_prize_table_median)
+    
+if chi2_category_prize_mean[1] < 0.05:
+    print(f"The mean prize value for each category differs significantly between rounds. P-value: {round(chi2_category_prize_mean[1], 3)}")
+else:
+    print("No significance was found")
+    
+if chi2_category_prize_median[1] < 0.05:
+    print(f"The median prize value for each category differs significantly between rounds. P-value: {round(chi2_category_prize_median[1], 3)}")
+else:
+    print("No significance was found")
+</code></pre>
+                    </details>
+                    <samp>The mean prize value for each category differs significantly between rounds of Jeopardy. P-value: 0.013</samp>
+                    <br>
+                    <samp>The median prize value for each category differs significantly between rounds Jeopardy. P-value: 0.011</samp>
+                </div>
+                <div>
+                    <p>Yes, there is a difference in prize value.</p>
+                </div>
+
+            </section> <!--End prize-distribution -->
+            <section class="year">
+                <div>
+                    <h2>Exploring the dataset by year</h2>
+                </div>
+                <div>
+                    <h3>What is the max and median prize for each year?</h3>
+                </div>
+                <div>
+                    <details>
+                        <summary>Show code</summary>
+<pre><code class="language-python">
+fig = plt.figure(figsize=(18,5)) 
+plot_max_prize = plt.bar(jeopardy_data.groupby(["air_year"], group_keys=True)[["value"]].max().index, \
+        jeopardy_data.groupby(["air_year"], group_keys=True)[["value"]].max()["value"], \
+                            color="navajowhite", edgecolor="black", label="Max prize value")
+plot_median_prize = plt.bar(jeopardy_data.groupby(["air_year"], group_keys=True)[["value"]].median().index, \
+        jeopardy_data.groupby(["air_year"], group_keys=True)[["value"]].median()["value"], \
+                            color="sandybrown", edgecolor="black", label="Median prize value")
+    
+for bar_max_prize, bar_median_prize in zip(plot_max_prize, plot_median_prize):
+    yval_max = bar_max_prize.get_height()
+    yval_median = bar_median_prize.get_height()
+    plt.text(bar_median_prize.get_x() + bar_median_prize.get_width()/2, yval_median+50, f"${int(yval_median):,}", \
+                ha="center", va="bottom", fontsize=8)
+    
+ax = plt.gca()
+ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda x, _: f"${int(x):,}".replace(",", ".")))
+plt.title("Max and median prize for correct answer per year", fontsize=15)
+plt.xlim((1983,2013))
+plt.ylim((0, 20000))
+plt.ylabel("Prize value", fontsize=13)
+plt.xlabel("Year", fontsize=13)
+plt.xticks(jeopardy_data.groupby(["air_year"], group_keys=True)[["value"]].max().index)
+plt.legend()
+plt.show()
+</code></pre>
+                    </details>
+                    <img src="./resources/images/max_median_prize_year_web.svg" alt="">
+                </div>
+                <div>
+                    <h3>What was the most valuable answer? What was the question? And in what category?</h3>
+                </div>
+                <div>
+                    <details>
+                        <summary>Show code</summary>
+<pre><code class="language-python">
+jeopardy_data.sort_values(by=['value'], ascending=False).head(1)
+</code></pre>
+                        </details>
+                        <samp>
+                            <table>
+                                <thead>
+                                    <tr> <!-- Header row  -->
+                                        <th></th>
+                                        <th scope="col">show_number</th>
+                                        <th scope="col"> air_date</th>
+                                        <th scope="col"> air_year</th>
+                                        <th scope="col"> round_type</th>
+                                        <th scope="col"> category</th>
+                                        <th scope="col"> value</th>
+                                        <th scope="col"> question</th>
+                                        <th scope="col"> answer</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr> <!-- 2. row  -->
+                                        <td>150825</td>
+                                        <td>6246</td>
+                                        <td>2011-11-14</td>
+                                        <td>2011</td>
+                                        <td>Double Jeopardy!</td>
+                                        <td>LANGUAGES</td>
+                                        <td>18000</td>
+                                        <td>although dutch is the official language, sranan tongo is spoken by most people in this south american country</td>
+                                        <td>suriname</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </samp>
+                </div>
+                <div>
+                    <h3>How many categories are in each year? How many are unique?</h3>
+                </div>
+                <div>
+                    <details>
+                        <summary>Show code</summary>
+<pre><code class="language-python">
+plt.figure(figsize=(18,5)) 
+plot_count_cat = plt.bar(jeopardy_data.groupby(["air_year"], group_keys=True)[["category"]].count().index, \
+        jeopardy_data.groupby(["air_year"], group_keys=True)[["category"]].count()["category"], \
+                            color="lavenderblush", edgecolor="black", label="Number of categories per year")
+plot_unique_cat = plt.bar(jeopardy_data.groupby(["air_year"], group_keys=True)[["category"]].nunique().index, \
+        jeopardy_data.groupby(["air_year"], group_keys=True)[["category"]].nunique()["category"], \
+                            color="thistle", edgecolor="black", label="Number of unique categories per year")
+for bar_count, bar_unique in zip(plot_count_cat, plot_unique_cat):
+    yval_count = bar_count.get_height()
+    yval_unique = bar_unique.get_height()
+    yval_percent = (yval_unique*100)/yval_count
+    plt.text(bar_unique.get_x() + bar_unique.get_width()/2, yval_unique+50, f"{round(yval_percent, 1):,}%", \
+                ha="center", va="bottom", fontsize=8)
+plt.title("Total count of categories each year \nwith calculated percent unique categories", fontsize=15)
+plt.xlim((1983.25,2012.75))
+ax = plt.gca()
+ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda x, _: f"{int(x):,}".replace(",", ".")))
+plt.ylabel("Number of categories", fontsize=13)
+plt.xlabel("Year", fontsize=13)
+plt.xticks(jeopardy_data.groupby(["air_year"], group_keys=True)[["category"]].nunique().index)
+plt.legend(fontsize="large")
+plt.show()
+</code></pre>
+                    </details>
+                    <img src="./resources/images/count_fraction_unique_category_year_web.svg" alt="">
+                </div>
+            </section> <!--End year -->
+
+            <section class="answers">
+                <div>
+                    <h2>Does some categories have more re-occurring answers than others?</h2>
+                </div>
+                <div>
+                    <details>
+                        <summary>Show code</summary>
+<pre><code class="language-python">
+# make a new dataframe
+
+count_unique_answers_by_category = jeopardy_data.groupby(["category"], group_keys=True)[["answer"]].nunique().reset_index()
+count_answers_by_category = jeopardy_data.groupby(["category"], group_keys=True)[["answer"]].count().reset_index()
+
+top_100_duplicate_answers_per_category_df = count_answers_by_category.set_index("category").join(count_unique_answers_by_category.set_index("category"), lsuffix="_count", rsuffix="_unique_count")
+top_100_duplicate_answers_per_category_df = top_100_duplicate_answers_per_category_df.sort_values(by="answer_count", ascending=False).head(100)
+
+#calculate the non-unique answers
+top_100_duplicate_answers_per_category_df["answer_duplicates"] = top_100_duplicate_answers_per_category_df.apply(lambda row: row["answer_count"] - row["answer_unique_count"], axis=1)
+
+#add a new column with color labels
+remaining_colors = ["silver"]*(len(top_100_duplicate_answers_per_category_df) - len(top_10_colors))
+color_labels = top_10_colors + remaining_colors
+top_100_duplicate_answers_per_category_df["color_label"] = color_labels
+
+#sort dataframe by highest non-unique answers and print head
+top_100_duplicate_answers_per_category_df_sorted = top_100_duplicate_answers_per_category_df.sort_values(by=['answer_duplicates'], ascending=False)
+top_100_duplicate_answers_per_category_df_sorted.head(5)
+</code></pre>
+                     </details>
+                    <samp>
+                        <table>
+                            <thead>
+                                <tr> <!-- Header row  -->
+                                    <th scope="col">category</th>
+                                    <th scope="col">answer_count</th>
+                                    <th scope="col">answer_unique_count</th>
+                                    <th scope="col">answer_duplicates</th>
+                                    <th scope="col">color_label</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr> <!-- 2. row  -->
+                                    <td>STATE CAPITALS</td>
+                                    <td>314</td>
+                                    <td>116</td>
+                                    <td>198</td>
+                                    <td>silver</td>
+                                </tr>
+                                <tr> <!-- 2. row  -->
+                                    <td>LANGUAGES</td>
+                                    <td>284</td>
+                                    <td>127</td>
+                                    <td>157</td>
+                                    <td>silver</td>
+                                </tr>
+                                <tr> <!-- 2. row  -->
+                                    <td>WORLD CAPITALS</td>
+                                    <td>300</td>
+                                    <td>151</td>
+                                    <td>149</td>
+                                    <td>silver</td>
+                                </tr>
+                                <tr> <!-- 2. row  -->
+                                    <td>SHAKESPEARE</td>
+                                    <td>294</td>
+                                    <td>146</td>
+                                    <td>148</td>
+                                    <td>silver</td>
+                                </tr>
+                                <tr> <!-- 2. row  -->
+                                    <td>U.S. CITIES</td>
+                                    <td>339</td>
+                                    <td>192</td>
+                                    <td>147</td>
+                                    <td>silver</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </samp>
+                    <div>
+                        <h3>Now make a plot to visualize it</h3>
+                    </div>
+                    <div>
+                        <details>
+                            <summary>Show code</summary>
+<pre><code class="language-python">
+fig = plt.figure(figsize=(18,7), tight_layout=True)
+fig.suptitle("Total number of answers in the top 100 categories \n sorted by categories with most frequenct non-unique answers", fontsize=22, y=1, x=0.425)
+
+plot_top_100_count_answers = plt.bar(top_100_duplicate_answers_per_category_df_sorted.index, \
+        top_100_duplicate_answers_per_category_df_sorted["answer_count"], \
+        color="lightgrey")
+plot_top_100_duplicate_answers = plt.bar(top_100_duplicate_answers_per_category_df_sorted.index, \
+        top_100_duplicate_answers_per_category_df_sorted["answer_duplicates"], \
+        color=top_100_duplicate_answers_per_category_df_sorted["color_label"])
+
+legend_patches = []
+x_labels = [tick.get_text() for tick in plt.gca().get_xticklabels()]
+
+for bar_count, bar_duplicate in zip(plot_top_100_count_answers, plot_top_100_duplicate_answers):
+    xval = (bar_duplicate.get_x()+bar_duplicate.get_width()/2)
+    yval_count = bar_count.get_height()
+    yval_duplicate = bar_duplicate.get_height()
+    yval_percent = (yval_duplicate*100)/yval_count
+    category_index = round(bar_duplicate.get_x())
+    if 0 <= category_index <= len(x_labels):
+        category_name = x_labels[category_index]
+        if category_name in list(top_10_categories_list):
+            plt.text(xval, yval_duplicate + 3, f"{int(yval_percent):,}", ha="center", va="bottom", fontsize="small")
+            patch = mpatches.Patch(color=bar_duplicate.get_facecolor(), label=category_name)
+            legend_patches.append(patch)
+
+plt.xlim((-1,100))
+plt.title("Percent of non-unique answer shown above bars for top 10 occurring categories")
+plt.xticks(rotation=90, fontsize=10)
+plt.ylabel("Count answer per category", fontsize=12)
+plt.legend(handles=legend_patches, title="10 most frequent categories in Jeopardy", bbox_to_anchor=(1, 0.75))
+plt.show()
+</code></pre>
+                        </details>
+                        <img src="./resources/images/top_100_categories_duplicate_answer_percent_web.svg" alt="">
+                    </div>
+                </div>
+            </section> <!--End answers -->
+            <section class="norway">
+                <div>
+                    <h2>Let's explore Norway!</h2>
+                </div>
+                <div>
+                    <h3>How many times per year was a question about Norway?</h3>
+                </div>
+                <div>
+                    <details>
+                        <summary>Show code</summary>
+<pre><code class="language-python">
+norway_as_answer = jeopardy_data[jeopardy_data.answer == "norway"]
+norway_as_answer_per_year = norway_as_answer.groupby(["air_year"], group_keys=True)[["answer"]].count()["answer"]
+
+norway_color_list = ["red"] + ["white"] + ["blue"]
+
+fig = plt.figure(figsize=(10,4), tight_layout=True)
+plt.bar(norway_as_answer_per_year.index, norway_as_answer_per_year.values, color=norway_color_list, edgecolor="black")
+plt.xticks(year_list, rotation=45)
+plt.xlabel("Year")
+plt.ylabel("Frequency")
+plt.title("When and how many times \"Norway\" has been the answer to a question in Jeopardy")
+plt.show()
+</code></pre>
+                    </details>
+                    <img src="./resources/images/norway_as_answer_year_web.svg" alt="">
+                </div>
+                <div>
+                    <h3>Let's extract the rows from 1989</h3>
+                </div>
+                <div>
+                    <details>
+                        <summary>Show code</summary>
+<pre><code class="language-python">
+jeopardy_data[(jeopardy_data.answer == "norway") & (jeopardy_data.air_year == 1989)].sort_values(by=['value'], ascending=False)
+</code></pre>
+                    </details>
+                    <samp>
+                        <table>
+                            <thead>
+                                <tr> <!-- Header row  -->
+                                    <th></th>
+                                    <th scope="col">show_number</th>
+                                    <th scope="col">air_date</th>
+                                    <th scope="col">air_year</th>
+                                    <th scope="col">round_type</th>
+                                    <th scope="col">category</th>
+                                    <th scope="col">value</th>
+                                    <th scope="col">question</th>
+                                    <th scope="col">answer</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr> <!-- 2. row  -->
+                                    <td>81358</td>
+                                    <td>1230</td>
+                                    <td>1989-12-29</td>
+                                    <td>1989</td>
+                                    <td>Jeopardy!</td>
+                                    <td>NORTH ON THE MAP</td>
+                                    <td>500</td>
+                                    <td>north cape in this country is considered the most northerly point in europe</td>
+                                    <td>norway</td>
+                                </tr>
+                                <tr> <!-- 2. row  -->
+                                    <td>16537</td>
+                                    <td>1210</td>
+                                    <td>1989-12-01</td>
+                                    <td>1989</td>
+                                    <td>Jeopardy!</td>
+                                    <td>NATIONAL ANTHEMS</td>
+                                    <td>500</td>
+                                    <td>"yes, we love this land", sing the fjord dwellers of this country</td>
+                                    <td>norway</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </samp>
+                </div>
+                <div>
+                    <h3>How valuable are the questions about Norway?</h3>
+                </div>
+                <div>
+                    <details>
+                        <summary>Show code</summary>
+<pre><code class="language-python">
+norway_as_answer_prize = norway_as_answer.groupby(["value"], group_keys=True)[["answer"]].count()["answer"]
+
+fig = plt.figure(figsize=(13,5))
+plt.bar(norway_as_answer_prize.index, norway_as_answer_prize.values, width=70, color=norway_color_list, edgecolor="black")
+ax = plt.gca()
+ax.xaxis.set_major_formatter(mticker.FuncFormatter(lambda x, _: f"${int(x):,}".replace(",", ".")))
+plt.ylabel("Frequency")
+plt.xticks(np.arange(min(norway_as_answer_prize.index), max(norway_as_answer_prize.index)+1, 100), rotation=45)
+plt.title("Prize frequency for questions about Norway")
+plt.xlim((-50,3050))
+plt.show()
+</code></pre>
+                    </details>
+                    <img src="./resources/images/norway_as_answer_prize_frequency_web.svg" alt="">
+                </div>
+                <div>
+                    <h3>Let's check out the most valuable question</h3>
+                </div>
+                <div>
+                    <details>
+                        <summary>Show code</summary>
+<pre><code class="language-python">
+jeopardy_data[jeopardy_data.answer == "norway"].sort_values(by=['value'], ascending=False).head(1)      
+</code></pre>
+                    </details>
+                    <samp>
+                        <table>
+                            <thead>
+                                <tr> <!-- Header row  -->
+                                    <th></th>
+                                    <th scope="col">show_number</th>
+                                    <th scope="col">air_date</th>
+                                    <th scope="col">air_year</th>
+                                    <th scope="col">round_type</th>
+                                    <th scope="col">category</th>
+                                    <th scope="col">value</th>
+                                    <th scope="col">question</th>
+                                    <th scope="col">answer</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr> <!-- 2. row  -->
+                                    <td>181164</td>
+                                    <td>4872</td>
+                                    <td>2005-11-15</td>
+                                    <td>2005</td>
+                                    <td>Double Jeopardy!</td>
+                                    <td>COMPOSERS</td>
+                                    <td>3000</td>
+                                    <td>rikard nordraak, who composed this country's national anthem, was a friend of edvard grieg</td>
+                                    <td>norway</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </samp>
+                </div>
+            </section>
         </main>
 
         <footer>
@@ -255,3 +925,39 @@ plt.show()</code></pre>
         </footer>
     </body>
 </html>
+
+
+
+
+
+
+
+<!-- <section class="title">
+    <div>
+        <h2>title</h2>
+    </div>
+    <div>
+        <details>
+            <summary>Show code</summary>
+<pre><code class="language-python">
+
+</code></pre>
+        </details>
+        <img src="#" alt="">
+    </div>
+</section> -->
+
+
+
+
+
+<!-- <details>
+    <summary>Show code</summary>
+    <pre><code class="language-python">
+
+    </code></pre>
+</details> -->
+
+<!-- <samp>
+
+</samp> -->

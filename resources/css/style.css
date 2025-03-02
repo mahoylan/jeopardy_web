@@ -68,4 +68,6 @@ tbody tr:hover {
 
 details summary {
     background-color: white;
+    color: darkgrey;
+    font-style: italic;
 }
