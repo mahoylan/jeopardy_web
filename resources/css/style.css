@@ -1,41 +1,103 @@
 /* Set a font family for the page */
 
-
-
-
-header {
-    display: flex;
-    position: fixed;
-    z-index: 100;
-    width: 100%;
-    top: 0;
-    height: 64px;
-    background-color: paleturquoise;
-    align-items: center;
-}
-
-header nav {
-    width: 100%;
-    background-color: coral;
-    align-content: center;
-    padding-right: 24px;
-}
-
-header nav ul {
-    display: flex;
-    list-style: none;
-    background-color: rgb(219, 41, 174);
-    justify-content: flex-end;
-}
-
-header nav li {
-    padding: 0 1%;
-    background-color: cadetblue;
+html {
+    font-family: "Open Sans", sans-serif;
 }
 
 main {
-    margin-top: 64px;
-    margin-left: 10px;
+    background-color: #1f234a;
+    padding-top: 2rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+h4 {
+    font-size: 1.25rem;
+}
+
+a {
+    color: black;
+    text-decoration: underline;
+}
+
+p, ul {
+    line-height: 1.5rem;
+}
+
+.text-only-section {
+    /* display: flex; */
+    /* justify-content: center; */
+    margin: 0 10% 1% 10%;
+    border-radius: 10px;
+    background-color: #e2ebff;
+}
+
+.text-code-section {
+    /* display: flex; */
+    /* justify-content: center; */
+    margin: 0 0.5rem 2rem 0.5rem;
+    border-radius: 10px;
+    background-color: #cdd5e6;
+}
+
+/* .text-code-container {
+
+} */
+
+.text-container {
+    /* background-color: #e2ebff; */
+    justify-items: left;
+    border-radius: 10px;
+    /* padding-bottom: 2rem; */
+    padding: 3rem 3rem 1rem 3rem;
+}
+
+.text-only-section.chatgpt {
+    background-color: #fffbc0;
+
+}
+
+.text-container p {
+    padding: 0.75rem 0;
+}
+
+.text-container ul, .text-container ol{
+    padding-left: 1rem;
+}
+
+.code-container {
+    max-width: 100%;
+    padding: 0 1rem;
+}
+
+details summary {
+    /* background-color: white; */
+    /* color: darkgrey; */
+    /* font-style: italic; */
+    /* padding: 2rem; */
+    width:100px;
+    margin: 0 2rem 1rem 2rem;
+    padding: 10px;
+    cursor: pointer;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+.code-container summary:hover {
+    background-color: aqua;
 }
 
 /* align tabel right
@@ -44,7 +106,14 @@ highligt when hover
 every other row is gray */
 
 table {
-    margin: 0 20px;
+    /* margin: 0 20px; */
+    padding: 5rem 0;
+    background-color: white;
+}
+
+.table-container {
+    padding: 1rem 0;
+    width: 100%;
 }
 
 th, td {
@@ -65,9 +134,6 @@ tbody tr:hover {
     background-color: rgb(206, 253, 255);
 }
 
-
-details summary {
-    background-color: white;
-    color: darkgrey;
-    font-style: italic;
+.image-container img {
+    max-width: 100%;
 }

@@ -3,6 +3,7 @@
     <head>
         <link rel="stylesheet" href="./resources/css/reset.css">
         <link rel="stylesheet" href="./resources/css/style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wdth,wght@0,75..100,300..800;1,75..100,300..800&display=swap" rel="stylesheet">
         <title>TEST</title>
         <!-- JavaScript https://highlightjs.org/demo https://cdnjs.com/libraries/highlight.js--> 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/atom-one-dark.min.css">
@@ -13,7 +14,7 @@
     </head>
 
     <body>
-        <header>
+        <!-- <header>
             <div>
                 <p>Super interesting title</p>
             </div>
@@ -26,36 +27,38 @@
                     <li>Navbar</li>
                 </ul>
             </nav>
-        </header>
+        </header> -->
 
         <main>
-            <section class="about-project">
-                <h2>About project header</h2>
-                <p>In following the <a href="https://www.codecademy.com/learn/paths/data-science-foundations">Data Science Foundation Skill Path</a> at <a href="https://www.codecademy.com/">Codecademy</a> I was tasked to test my newly learned data manipulation skills by exploring a datset with Jeopardy data. But before I could get started, Codecademy sent me to another course to learn <a href="https://www.codecademy.com/learn/practical-data-cleaning">how to clean data with Python</a> and down yet another skill path to <a href="https://www.codecademy.com/learn/paths/analyze-data-with-python">learn to analyze data with Python</a>. The last task in the Analyze data with Python skill path was to create a portfolio project, using Python and a dataset of my own choice. And thus I chose the jeopardy dataset <a href="jeopardy_csv.zip">(found here)</a>, hitting two birds with one stone. Even though I could have exported the Jupyter Notebook as a html-file, I chose to build this page from scratch using what I've learned about <a href="https://www.codecademy.com/learn/paths/learn-how-to-build-websites">HTML and CSS</a>.</p>
-                <p>The goals for the analyze data project was
-                    <ul>
-                        <li>Create a project in <b>Jupyter Notebook</b></li>
-                        <li>Clean and prepare the dataset using <b>Pandas</b> and <b>NumPy</b></li>
-                        <li>Make visualizations using <b>Matplotlib</b></li>
-                        <li>Utilize hypothesis testing with <b>SciPy</b> and <b>statsmodels</b></li>
-                    </ul>
-                </p>
-                <p>While the goals for the data science project was 
-                    <ul>
-                        <li>Write a function that filters the dataset for questions that contains all of the words in a list of words</li>
-                        <li>Test your original function with a few different sets of words to try to find some ways your function breaks. Edit your function so it is more robust.</li>
-                        <li>Convert the " Value" column to floats. Find the "difficulty" of certain topics.</li>
-                        <li>Write a function that returns the count of the unique answers to all of the questions in a dataset.</li>
-                    </ul>
-                </p>
-                <p>I will spend most of this page on displaying code and plots from the Analyze data project as a website about functions is rather dull, although I did some of that as well. See the bottom of the page.</p>
+            <section class="text-only-section">
+                <div class="text-container">
+                    <h1>About the project</h1>
+                    <p>In following the <a href="https://www.codecademy.com/learn/paths/data-science-foundations">Data Science Foundation Skill Path</a> at <a href="https://www.codecademy.com/">Codecademy</a> I was tasked to test my newly learned data manipulation skills by exploring a datset of Jeopardy data. But before I could get started, Codecademy sent me to another course to learn <a href="https://www.codecademy.com/learn/practical-data-cleaning">how to clean data with Python</a> and down yet another skill path to <a href="https://www.codecademy.com/learn/paths/analyze-data-with-python">learn to analyze data with Python</a>. The last task in the Analyze data with Python skill path was to create a portfolio project, using Python and a dataset of my own choice. And thus I chose the jeopardy dataset <a href="jeopardy_csv.zip">(found here)</a>, hitting two birds with one stone. Even though I could have exported the Jupyter Notebook as a html-file, I chose to build this page from scratch using what I've learned about <a href="https://www.codecademy.com/learn/paths/learn-how-to-build-websites">HTML and CSS</a>.</p>
+                    <h3>The project goals for the Analyze Data with Python Skill Path was</h3>
+                        <ul>
+                            <li>Create a project in <b>Jupyter Notebook</b></li>
+                            <li>Clean and prepare the dataset using <b>Pandas</b> and <b>NumPy</b></li>
+                            <li>Make visualizations using <b>Matplotlib</b></li>
+                            <li>Utilize hypothesis testing with <b>SciPy</b> and <b>statsmodels</b></li>
+                        </ul>
+                    <h3>The project goals for the Data Science Foundation Skill Path was</h3>
+                        <ul>
+                            <li>Write a function that filters the dataset for questions that contains all of the words in a list of words</li>
+                            <li>Test your original function with a few different sets of words to try to find some ways your function breaks. Edit your function so it is more robust.</li>
+                            <li>Convert the " Value" column to floats. Find the "difficulty" of certain topics.</li>
+                            <li>Write a function that returns the count of the unique answers to all of the questions in a dataset.</li>
+                        </ul>
+                    <p>I will spend most of this page on displaying code and plots from the Analyze data project as a website about functions is rather dull, although I did some of that as well. See the bottom of the page.</p>
+                </div>
             </section><!-- End about-project -->
 
-            <section class="set-up">
-                <div>
-                    <div>
+            <section class="text-code-section">
+                <div class="text-code-container">
+                    <div class="text-container">
                         <h2>Set up</h2>
-                        <p>Read in the data from .csv into a pandas dataframe and import relevant libraries</p>
+                        <p>Read in the data from .csv into a pandas dataframe and import relevant modules</p>
+                    </div>
+                    <div class="code-container">
                         <details>
                             <summary>Show code</summary>
 <pre><code class="language-python">
@@ -80,92 +83,91 @@ jeopardy_data.head(5)
 </code></pre>
                         </details>
                     </div>
-                    <samp>
-                    <table>
-                        <thead>
-                            <tr> <!-- Header row  -->
-                                <th></th>
-                                <th scope="col">Show Number</th>
-                                <th scope="col"> Air Date</th>
-                                <th scope="col"> Round</th>
-                                <th scope="col"> Category</th>
-                                <th scope="col"> Value</th>
-                                <th scope="col"> Question</th>
-                                <th scope="col"> Answer</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr> <!-- 2. row  -->
-                                <td>0</td>
-                                <td>4680</td>
-                                <td>2004-12-31</td>
-                                <td>Jeopardy!</td>
-                                <td>HISTORY</td>
-                                <td>$200</td>
-                                <td>For the last 8 years of his life, Galileo was under house arrest for espousing this man's theory</td>
-                                <td>Copernicus</td>
-                            </tr>
-                            <tr> <!-- 3. row  -->
-                                <td>1</td>
-                                <td>4680</td>
-                                <td>2004-12-31</td>
-                                <td>Jeopardy!</td>
-                                <td>ESPN's TOP 10 ALL-TIME ATHLETES</td>
-                                <td>$200</td>
-                                <td>No. 2: 1912 Olympian; football star at Carlisle Indian School; 6 MLB seasons with the Reds, Giants & Braves</td>
-                                <td>Jim Thorpe</td>
-                            </tr>
-                            <tr> <!-- 4. row  -->
-                                <td>2</td>
-                                <td>4680</td>
-                                <td>2004-12-31</td>
-                                <td>Jeopardy!</td>
-                                <td>EVERYBODY TALKS ABOUT IT...</td>
-                                <td>$200</td>
-                                <td>The city of Yuma in this state has a record average of 4,055 hours of sunshine each year</td>
-                                <td>Arizona</td>
-                            </tr>
-                            <tr> <!-- 5. row  -->
-                                <td>3</td>
-                                <td>4680</td>
-                                <td>2004-12-31</td>
-                                <td>Jeopardy!</td>
-                                <td>THE COMPANY LINE</td>
-                                <td>$200</td>
-                                <td>In 1963, live on "The Art Linkletter Show", this company served its billionth burger</td>
-                                <td>McDonald's</td>
-                            </tr>
-                            <tr> <!-- 6. row  -->
-                                <td>4</td>
-                                <td>4680</td>
-                                <td>2004-12-31</td>
-                                <td>Jeopardy!</td>
-                                <td>EPITAPHS & TRIBUTES</td>
-                                <td>$200</td>
-                                <td>Signer of the Dec. of Indep., framer of the Constitution of Mass., second President of the United States</td>
-                                <td>John Adams</td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td></td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </samp>
-                </div>
-            </section> <!--End set-up-->
+                    <div class="table-container">
+                        <samp>
+                            <table>
+                                <thead>
+                                    <tr> <!-- Header row  -->
+                                        <th></th>
+                                        <th scope="col">Show Number</th>
+                                        <th scope="col"> Air Date</th>
+                                        <th scope="col"> Round</th>
+                                        <th scope="col"> Category</th>
+                                        <th scope="col"> Value</th>
+                                        <th scope="col"> Question</th>
+                                        <th scope="col"> Answer</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr> <!-- 2. row  -->
+                                        <td>0</td>
+                                        <td>4680</td>
+                                        <td>2004-12-31</td>
+                                        <td>Jeopardy!</td>
+                                        <td>HISTORY</td>
+                                        <td>$200</td>
+                                        <td>For the last 8 years of his life, Galileo was under house arrest for espousing this man's theory</td>
+                                        <td>Copernicus</td>
+                                    </tr>
+                                    <tr> <!-- 3. row  -->
+                                        <td>1</td>
+                                        <td>4680</td>
+                                        <td>2004-12-31</td>
+                                        <td>Jeopardy!</td>
+                                        <td>ESPN's TOP 10 ALL-TIME ATHLETES</td>
+                                        <td>$200</td>
+                                        <td>No. 2: 1912 Olympian; football star at Carlisle Indian School; 6 MLB seasons with the Reds, Giants & Braves</td>
+                                        <td>Jim Thorpe</td>
+                                    </tr>
+                                    <tr> <!-- 4. row  -->
+                                        <td>2</td>
+                                        <td>4680</td>
+                                        <td>2004-12-31</td>
+                                        <td>Jeopardy!</td>
+                                        <td>EVERYBODY TALKS ABOUT IT...</td>
+                                        <td>$200</td>
+                                        <td>The city of Yuma in this state has a record average of 4,055 hours of sunshine each year</td>
+                                        <td>Arizona</td>
+                                    </tr>
+                                    <tr> <!-- 5. row  -->
+                                        <td>3</td>
+                                        <td>4680</td>
+                                        <td>2004-12-31</td>
+                                        <td>Jeopardy!</td>
+                                        <td>THE COMPANY LINE</td>
+                                        <td>$200</td>
+                                        <td>In 1963, live on "The Art Linkletter Show", this company served its billionth burger</td>
+                                        <td>McDonald's</td>
+                                    </tr>
+                                    <tr> <!-- 6. row  -->
+                                        <td>4</td>
+                                        <td>4680</td>
+                                        <td>2004-12-31</td>
+                                        <td>Jeopardy!</td>
+                                        <td>EPITAPHS & TRIBUTES</td>
+                                        <td>$200</td>
+                                        <td>Signer of the Dec. of Indep., framer of the Constitution of Mass., second President of the United States</td>
+                                        <td>John Adams</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </samp>
+                    </div> <!-- End table-container container -->
+                </div> <!--End text-code-container-->
+            </section> <!--End text-code-section-->
 
-            <section class="clean-prepare">
-                <div>
-                    <h2>Clean and prepare data</h2>
-                    <!-- <code>jeopardy_data.info()<br></code> -->
-                    <ol>
-                        <li>Rename columns</li>
-                        <li>Fix type for Air Date and Value columns</li>
-                        <li>Clean up the Category, Question and Answer columns</li>
-                    </ol>
-                    <div>
+            <section class="text-code-section">
+                <div class="text-code-container">
+                    <div class="text-container">
+                        <h2>Clean and prepare data</h2>
+                        <!-- <code>jeopardy_data.info()<br></code> -->
+                        <ol>
+                            <li>Rename columns</li>
+                            <li>Fix type for Air Date and Value columns</li>
+                            <li>Clean up the Category, Question and Answer columns</li>
+                        </ol>
+                    </div>
+                    <div class="code-container">
                         <details>
                             <summary>Show code</summary>
 <pre><code class="language-python">
@@ -212,92 +214,93 @@ memory usage: 11.6+ MB
 jeopardy_data.head(5)
 </code></pre> 
                         </details>
-
+                    </div> <!-- End code-container  -->
+                    <div class="table-container">
                         <samp>
-                        <table>
-                            <thead>
-                                <tr> <!-- Header row  -->
-                                    <th></th>
-                                    <th scope="col">show_number</th>
-                                    <th scope="col"> air_date</th>
-                                    <th scope="col"> air_year</th>
-                                    <th scope="col"> round_type</th>
-                                    <th scope="col"> category</th>
-                                    <th scope="col"> value</th>
-                                    <th scope="col"> question</th>
-                                    <th scope="col"> answer</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr> <!-- 2. row  -->
-                                    <td>0</td>
-                                    <td>4680</td>
-                                    <td>2004-12-31</td>
-                                    <td>2004</td>
-                                    <td>Jeopardy!</td>
-                                    <td>HISTORY</td>
-                                    <td>200</td>
-                                    <td>for the last 8 years of his life, galileo was under house arrest for espousing this man's theory</td>
-                                    <td>copernicus</td>
-                                </tr>
-                                <tr> <!-- 3. row  -->
-                                    <td>1</td>
-                                    <td>4680</td>
-                                    <td>2004-12-31</td>
-                                    <td>2004</td>
-                                    <td>Jeopardy!</td>
-                                    <td>ESPN's TOP 10 ALL-TIME ATHLETES</td>
-                                    <td>200</td>
-                                    <td>no. 2: 1912 olympian; football star at carlisle indian school; 6 mlb seasons with the reds, giants & braves</td>
-                                    <td>jim thorpe</td>
-                                </tr>
-                                <tr> <!-- 4. row  -->
-                                    <td>2</td>
-                                    <td>4680</td>
-                                    <td>2004-12-31</td>
-                                    <td>2004</td>
-                                    <td>Jeopardy!</td>
-                                    <td>EVERYBODY TALKS ABOUT IT...</td>
-                                    <td>200</td>
-                                    <td>the city of yuma in this state has a record average of 4,055 hours of sunshine each year</td>
-                                    <td>arizona</td>
-                                </tr>
-                                <tr> <!-- 5. row  -->
-                                    <td>3</td>
-                                    <td>4680</td>
-                                    <td>2004-12-31</td>
-                                    <td>2004</td>
-                                    <td>Jeopardy!</td>
-                                    <td>THE COMPANY LINE</td>
-                                    <td>200</td>
-                                    <td>in 1963, live on "the art linkletter show", this company served its billionth burger</td>
-                                    <td>mcdonald's</td>
-                                </tr>
-                                <tr> <!-- 6. row  -->
-                                    <td>4</td>
-                                    <td>4680</td>
-                                    <td>2004-12-31</td>
-                                    <td>2004</td>
-                                    <td>Jeopardy!</td>
-                                    <td>EPITAPHS & TRIBUTES</td>
-                                    <td>200</td>
-                                    <td>signer of the dec. of indep., framer of the constitution of mass., second president of the united states</td>
-                                    <td>john adams</td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td></td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </samp>
-                    </div>
-                </div>
-            </section><!-- End clean-prepare -->
+                            <table>
+                                <thead>
+                                    <tr> <!-- Header row  -->
+                                        <th></th>
+                                        <th scope="col">show_number</th>
+                                        <th scope="col"> air_date</th>
+                                        <th scope="col"> air_year</th>
+                                        <th scope="col"> round_type</th>
+                                        <th scope="col"> category</th>
+                                        <th scope="col"> value</th>
+                                        <th scope="col"> question</th>
+                                        <th scope="col"> answer</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr> <!-- 2. row  -->
+                                        <td>0</td>
+                                        <td>4680</td>
+                                        <td>2004-12-31</td>
+                                        <td>2004</td>
+                                        <td>Jeopardy!</td>
+                                        <td>HISTORY</td>
+                                        <td>200</td>
+                                        <td>for the last 8 years of his life, galileo was under house arrest for espousing this man's theory</td>
+                                        <td>copernicus</td>
+                                    </tr>
+                                    <tr> <!-- 3. row  -->
+                                        <td>1</td>
+                                        <td>4680</td>
+                                        <td>2004-12-31</td>
+                                        <td>2004</td>
+                                        <td>Jeopardy!</td>
+                                        <td>ESPN's TOP 10 ALL-TIME ATHLETES</td>
+                                        <td>200</td>
+                                        <td>no. 2: 1912 olympian; football star at carlisle indian school; 6 mlb seasons with the reds, giants & braves</td>
+                                        <td>jim thorpe</td>
+                                    </tr>
+                                    <tr> <!-- 4. row  -->
+                                        <td>2</td>
+                                        <td>4680</td>
+                                        <td>2004-12-31</td>
+                                        <td>2004</td>
+                                        <td>Jeopardy!</td>
+                                        <td>EVERYBODY TALKS ABOUT IT...</td>
+                                        <td>200</td>
+                                        <td>the city of yuma in this state has a record average of 4,055 hours of sunshine each year</td>
+                                        <td>arizona</td>
+                                    </tr>
+                                    <tr> <!-- 5. row  -->
+                                        <td>3</td>
+                                        <td>4680</td>
+                                        <td>2004-12-31</td>
+                                        <td>2004</td>
+                                        <td>Jeopardy!</td>
+                                        <td>THE COMPANY LINE</td>
+                                        <td>200</td>
+                                        <td>in 1963, live on "the art linkletter show", this company served its billionth burger</td>
+                                        <td>mcdonald's</td>
+                                    </tr>
+                                    <tr> <!-- 6. row  -->
+                                        <td>4</td>
+                                        <td>4680</td>
+                                        <td>2004-12-31</td>
+                                        <td>2004</td>
+                                        <td>Jeopardy!</td>
+                                        <td>EPITAPHS & TRIBUTES</td>
+                                        <td>200</td>
+                                        <td>signer of the dec. of indep., framer of the constitution of mass., second president of the united states</td>
+                                        <td>john adams</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </samp>
+                    </div> <!-- End table-container -->
+                </div> <!-- End text-code-container -->
+            </section><!-- End text-code-section -->
                 
-            <section class="brainstorm">
-                <div>
+            <section class="text-only-section chatgpt">
+                <div class="text-container">
                     <h2>Brainstorm analytical ideas with ChatGPT</h2>
                     <p>Prompt sent: <br>
                         "Good day! I have a dataset from the TV show Jeopardy that I'm analyzing with Python in Jupyter Notebook. I've loaded the dataset into a pandas dataframe and called it jeopardy_data. Each row is a question. The columns contain 'show_number' (integer), 'air_date' (string of date of air), 'round_type' (what type of round it was, either 'Jeopardy!' 'Double Jeopardy!' 'Final Jeopardy!' 'Tiebreaker'), 'category' (what category the question belongs to), 'value' (price value of the question), 'question' (the question), 'answer' (the answer). Can you brainstorm 5 ideas of how to explore and analyze the dataset?"</p>
@@ -334,17 +337,17 @@ jeopardy_data.head(5)
                         </ol>
                     </p>
                 </div>
-            </section> <!--End brainstorm-->
+            </section> <!--End ChatGPT-->
 
-            <section class="common_categories">
-                <div>
-                    <h2>Most common categories</h2>
-                    <p>I chose to start with counting the 10 most frequent categories and took it from there</p>
-                </div>
-
-                <div>
-                    <details>
-                        <summary>Show code</summary>
+            <section class="text-code-section">
+                <div class="text-code-container">
+                    <div class="text-container">
+                        <h2>Most common categories</h2>
+                        <p>I chose to start with counting the 10 most frequent categories and took it from there</p>
+                    </div>
+                    <div class="code-container">
+                        <details>
+                            <summary>Show code</summary>
 <pre><code class="language-python">
 #count the values in category column, returns a pandas series sorted after heighest count
 category_counts = jeopardy_data["category"].value_counts()
@@ -368,17 +371,22 @@ plt.ylim(top=650)
 plt.xticks(rotation=45, ha="right") 
 plt.show()</code></pre>
                     </details>
-                    <img src="./resources/images/top_10_most_frequent_categories.svg" alt="">
+                    <div class="image-container">
+                        <img src="./resources/images/top_10_most_frequent_categories.svg" alt="">
+                    </div>
+                    
+                </div>
                 </div>
             </section> <!--End common_categories-->
 
-            <section class="rounds-overlapping-categories">
-                <div>
-                    <h3>What categories are most predominant in the different rounds of Jeopardy?</h3>
-                </div>
-                <div>
-                    <details>
-                        <summary>Show code</summary>
+            <section class="text-code-section">
+                <div class="text-code-container">
+                    <div class="text-container">
+                        <h3>What categories are most predominant in the different rounds of Jeopardy?</h3>
+                    </div>                
+                    <div>
+                        <details>
+                            <summary>Show code</summary>
 <pre><code class="language-python">
 print("Types of round:", jeopardy_data.round_type.unique())
 </code></pre>
@@ -428,6 +436,7 @@ top_100_categories = category_counts_filtered_sorted.head(100)
 top_100_categories.head(11)
 </code></pre>
                     </details>
+                    </div>
                     <samp>
                         <table>
                             <thead>
@@ -578,16 +587,20 @@ for i, round_type in enumerate(top_100_cat_variables_list):
 plt.show()
 </code></pre>
                     </details>
-                    <img src="./resources/images/top_100_categories_each_round_legend_web.svg" alt="">
+                    <div class="image-container">
+                        <img src="./resources/images/top_100_categories_each_round_legend_web.svg" alt="">
+                    </div>
+                    
                 </div>
             </section> <!--End rounds-overlapping-categories -->
-            <section class="prize-distribution">
-                <div>
-                    <h3>Is there a difference in the prize value between the round types Jeopardy and Double Jeopardy?</h3>
-                </div>
-                <div>
-                    <details>
-                        <summary>Show code</summary>
+            <section class="text-code-section">
+                <div class="text-code-container">
+                    <div class="text-container">
+                        <h3>Is there a difference in the prize value between the round types Jeopardy and Double Jeopardy?</h3>
+                    </div>
+                    <div>
+                        <details>
+                            <summary>Show code</summary>
 <pre><code class="language-python">
 #make a dataframe with only categories shared between the round types Jeopardy and Double Jeropardy
 overlapping_categories_jeopardy_double = jeopardy_data[jeopardy_data["category"].isin(shared_jeopardy_double)]
@@ -614,9 +627,13 @@ for i, category in enumerate(top_10_categories_list, start=1): #loop through the
 plt.show()
 </code></pre>
                     </details>
-                    <img src="./resources/images/top_10_categories_prize_distribution_round_web.svg" alt="">
+                    <div class="image-container">
+                        <img src="./resources/images/top_10_categories_prize_distribution_round_web.svg" alt="">
+                    </div>
+                    
                 </div>
-                <div>
+                </div>
+                <div class="text-container">
                     <h3>Is there a difference in the prize mean and median between the two round types?</h3>
                 </div>
                 <div>
@@ -661,16 +678,17 @@ else:
                 </div>
 
             </section> <!--End prize-distribution -->
-            <section class="year">
-                <div>
-                    <h2>Exploring the dataset by year</h2>
-                </div>
-                <div>
-                    <h3>What is the max and median prize for each year?</h3>
-                </div>
-                <div>
-                    <details>
-                        <summary>Show code</summary>
+            <section class="text-code-section">
+                <div class="text-code-container">
+                    <div class="text-container">
+                        <h2>Exploring the dataset by year</h2>
+                    </div>
+                    <div class="text-container">
+                        <h3>What is the max and median prize for each year?</h3>
+                    </div>
+                    <div>
+                        <details>
+                            <summary>Show code</summary>
 <pre><code class="language-python">
 fig = plt.figure(figsize=(18,5)) 
 plot_max_prize = plt.bar(jeopardy_data.groupby(["air_year"], group_keys=True)[["value"]].max().index, \
@@ -696,7 +714,11 @@ plt.legend()
 plt.show()
 </code></pre>
                     </details>
-                    <img src="./resources/images/max_median_prize_year_web.svg" alt="">
+                    <div class="image-container">
+                        <img src="./resources/images/max_median_prize_year_web.svg" alt="">
+                    </div>
+                    
+                </div>
                 </div>
                 <div>
                     <h3>What was the most valuable answer? What was the question? And in what category?</h3>
@@ -777,14 +799,18 @@ plt.legend(fontsize="large")
 plt.show()
 </code></pre>
                     </details>
-                    <img src="./resources/images/count_fraction_unique_category_year_web.svg" alt="">
+                    <div class="image-container">
+                        <img src="./resources/images/count_fraction_unique_category_year_web.svg" alt="">
+                    </div>
+                    
                 </div>
             </section> <!--End year -->
 
-            <section class="answers">
-                <div>
-                    <h2>Does some categories have more re-occurring answers than others?</h2>
-                </div>
+            <section class="text-code-section">
+                <div class="text-code-container">
+                    <div class="text-container">
+                        <h2>Does some categories have more re-occurring answers than others?</h2>
+                    </div>
                 <div>
                     <details>
                         <summary>Show code</summary>
@@ -810,6 +836,7 @@ top_100_duplicate_answers_per_category_df_sorted = top_100_duplicate_answers_per
 top_100_duplicate_answers_per_category_df_sorted.head(5)
 </code></pre>
                      </details>
+                     </div>
                     <samp>
                         <table>
                             <thead>
@@ -906,7 +933,10 @@ plt.legend(handles=legend_patches, title="10 most frequent categories in Jeopard
 plt.show()
 </code></pre>
                         </details>
-                        <img src="./resources/images/top_100_categories_duplicate_answer_percent_web.svg" alt="">
+                        <div class="image-container">
+                            <img src="./resources/images/top_100_categories_duplicate_answer_percent_web.svg" alt="">
+                        </div>
+                        
                     </div>
                 </div>
             </section> <!--End answers -->
@@ -935,7 +965,9 @@ plt.title("When and how many times \"Norway\" has been the answer to a question 
 plt.show()
 </code></pre>
                     </details>
-                    <img src="./resources/images/norway_as_answer_year_web.svg" alt="">
+                    <div class="image-container">
+                        <img src="./resources/images/norway_as_answer_year_web.svg" alt="">
+                    </div>
                 </div>
                 <div>
                     <h3>Let's extract the rows from 1989</h3>
@@ -1015,7 +1047,9 @@ plt.xlim((-50,3050))
 plt.show()
 </code></pre>
                     </details>
-                    <img src="./resources/images/norway_as_answer_prize_frequency_web.svg" alt="">
+                    <div class="image-container">
+                        <img src="./resources/images/norway_as_answer_prize_frequency_web.svg" alt="">
+                    </div>
                 </div>
                 <div>
                     <h3>Let's check out the most valuable question</h3>
