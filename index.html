@@ -54,7 +54,7 @@
 
             <section class="text-code-section">
                 <div class="text-code-container">
-                    <div class="text-container">
+                    <div class="text-container code">
                         <h2>Set up</h2>
                         <p>Read in the data from .csv into a pandas dataframe and import relevant modules</p>
                     </div>
@@ -158,7 +158,7 @@ jeopardy_data.head(5)
 
             <section class="text-code-section">
                 <div class="text-code-container">
-                    <div class="text-container">
+                    <div class="text-container code">
                         <h2>Clean and prepare data</h2>
                         <!-- <code>jeopardy_data.info()<br></code> -->
                         <ol>
@@ -194,8 +194,8 @@ jeopardy_data["question"] = jeopardy_data["question"].str.lower().str.strip()
 jeopardy_data["answer"] = jeopardy_data["answer"].astype("string") 
 jeopardy_data["answer"] = jeopardy_data["answer"].str.lower().str.strip()
 
-print(jeopardy_data.info())
-
+print(jeopardy_data.info())</code></pre>
+<pre><code class="language-plaintext">
 &ltclass 'pandas.core.frame.DataFrame'>
 RangeIndex: 216930 entries, 0 to 216929
 Data columns (total 7 columns):
@@ -341,7 +341,7 @@ jeopardy_data.head(5)
 
             <section class="text-code-section">
                 <div class="text-code-container">
-                    <div class="text-container">
+                    <div class="text-container code">
                         <h2>Most common categories</h2>
                         <p>I chose to start with counting the 10 most frequent categories and took it from there</p>
                     </div>
@@ -390,7 +390,7 @@ plt.show()</code></pre>
 <pre><code class="language-python">
 print("Types of round:", jeopardy_data.round_type.unique())
 </code></pre>
-<samp>Types of round: ['Jeopardy!' 'Double Jeopardy!' 'Final Jeopardy!' 'Tiebreaker']</samp>
+<pre><code class="language-plaintext">Types of round: ['Jeopardy!' 'Double Jeopardy!' 'Final Jeopardy!' 'Tiebreaker']</code></pre>
 <pre><code class="language-python">
 #divide the dataset into each round
 jeopardy_round = jeopardy_data[jeopardy_data.round_type == "Jeopardy!"]

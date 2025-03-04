@@ -65,6 +65,11 @@ p, ul {
     padding: 3rem 3rem 1rem 3rem;
 }
 
+.text-container.code {
+    padding: 3rem 3rem 1rem 13rem;
+    /* background-color: blue; */
+}
+
 .text-only-section.chatgpt {
     background-color: #fffbc0;
 
@@ -89,15 +94,21 @@ details summary {
     /* font-style: italic; */
     /* padding: 2rem; */
     width:100px;
-    margin: 0 2rem 1rem 2rem;
+    margin: 0 2rem 1rem 12rem;
     padding: 10px;
     cursor: pointer;
     border: 2px solid black;
     border-radius: 10px;
+    transition: background-color 250ms linear;
 }
 
 .code-container summary:hover {
     background-color: aqua;
+    /* background: linear-gradient(#f5aeae, #b5bbff); */
+}
+
+.code-container summary:active {
+    box-shadow: 2px 2px 5px black;
 }
 
 /* align tabel right
@@ -114,6 +125,9 @@ table {
 .table-container {
     padding: 1rem 0;
     width: 100%;
+    display: flex;
+    background-color: white;
+    justify-content: center;
 }
 
 th, td {
