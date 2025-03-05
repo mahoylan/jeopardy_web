@@ -38,24 +38,14 @@ p, ul {
 }
 
 .text-only-section {
-    /* display: flex; */
-    /* justify-content: center; */
-    margin: 0 10% 1% 10%;
+    display: flex;
+    justify-self: center;
+    margin-bottom: 1rem;
     border-radius: 10px;
     background-color: #e2ebff;
+    /* max-width: 60%; */
+    width: 60%;
 }
-
-.text-code-section {
-    /* display: flex; */
-    /* justify-content: center; */
-    margin: 0 0.5rem 2rem 0.5rem;
-    border-radius: 10px;
-    background-color: #cdd5e6;
-}
-
-/* .text-code-container {
-
-} */
 
 .text-container {
     /* background-color: #e2ebff; */
@@ -65,14 +55,30 @@ p, ul {
     padding: 3rem 3rem 1rem 3rem;
 }
 
+.text-code-section {
+    display: flex;
+    justify-content: center;
+    margin: 0 0.5rem 1rem 0.5rem;
+    border-radius: 10px;
+    background-color: #cdd5e6;
+    /* justify-content: space-around; */
+    /* justify-content: stretch; */
+}
+
+/* .text-code-container {
+
+} */
+
 .text-container.code {
-    padding: 3rem 3rem 1rem 13rem;
+    /* padding: 3rem 3rem 1rem 24rem; */
     /* background-color: blue; */
+    width: 75%;
+    justify-self: center;
 }
 
 .text-only-section.chatgpt {
-    background-color: #fffbc0;
-
+    /* background-color: #fffbc0; */
+    background-color: hsl(24, 90%, 80%);
 }
 
 .text-container p {
@@ -85,7 +91,18 @@ p, ul {
 
 .code-container {
     max-width: 100%;
-    padding: 0 1rem;
+    border-radius: 10px;
+    /* padding: 0 1rem; */
+}
+
+code {
+    border-radius: 10px;
+    margin-top: 1rem;
+    margin: 0 1rem;
+}
+
+.chatgpt code {
+    margin: 0;
 }
 
 details summary {
@@ -94,7 +111,8 @@ details summary {
     /* font-style: italic; */
     /* padding: 2rem; */
     width:100px;
-    margin: 0 2rem 1rem 12rem;
+    margin-bottom: 1rem;
+    margin-left: 12.5%;
     padding: 10px;
     cursor: pointer;
     border: 2px solid black;
@@ -102,8 +120,11 @@ details summary {
     transition: background-color 250ms linear;
 }
 
+    /* Jupyter Notebook orange */
+    /* background-color: hsl(24, 90%, 55%); */ 
+
 .code-container summary:hover {
-    background-color: aqua;
+    background-color: hsl(24, 90%, 60%);
     /* background: linear-gradient(#f5aeae, #b5bbff); */
 }
 
@@ -116,19 +137,21 @@ underline header row
 highligt when hover
 every other row is gray */
 
-table {
-    /* margin: 0 20px; */
-    padding: 5rem 0;
-    background-color: white;
-}
-
 .table-container {
     padding: 1rem 0;
     width: 100%;
     display: flex;
-    background-color: white;
+    /* background-color: white; */
     justify-content: center;
 }
+
+table {
+    /* margin: 0 20px; */
+    padding: 5rem 0;
+    background-color: white;
+    border-radius: 10px;
+}
+
 
 th, td {
     text-align: right;
@@ -148,6 +171,20 @@ tbody tr:hover {
     background-color: rgb(206, 253, 255);
 }
 
-.image-container img {
+.image-container {
+    padding: 1rem;
     max-width: 100%;
+    /* justify-items: center; */
+    /* justify-content: center; */
+    /* justify-content: space-around; */
+    text-align: center;
+    /* justify-self: center; */
+}
+
+img {
+    border-radius: 10px;
+    /* max-width: 90%; */
+    max-width: 90%;
+    height: auto;
+    justify-self: center;
 }

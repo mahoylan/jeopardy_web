@@ -14,21 +14,6 @@
     </head>
 
     <body>
-        <!-- <header>
-            <div>
-                <p>Super interesting title</p>
-            </div>
-            <nav>
-                <ul>
-                    <li>Navbar</li>
-                    <li>Navbar</li>
-                    <li>Navbar</li>
-                    <li>Navbar</li>
-                    <li>Navbar</li>
-                </ul>
-            </nav>
-        </header> -->
-
         <main>
             <section class="text-only-section">
                 <div class="text-container">
@@ -371,20 +356,19 @@ plt.ylim(top=650)
 plt.xticks(rotation=45, ha="right") 
 plt.show()</code></pre>
                     </details>
+                </div> <!--End code-container-->
                     <div class="image-container">
                         <img src="./resources/images/top_10_most_frequent_categories.svg" alt="">
                     </div>
-                    
-                </div>
-                </div>
-            </section> <!--End common_categories-->
+                </div> <!--End text-code-container-->
+            </section> <!--End text-code-section-->
 
             <section class="text-code-section">
                 <div class="text-code-container">
-                    <div class="text-container">
+                    <div class="text-container code">
                         <h3>What categories are most predominant in the different rounds of Jeopardy?</h3>
                     </div>                
-                    <div>
+                    <div class="code-container">
                         <details>
                             <summary>Show code</summary>
 <pre><code class="language-python">
@@ -436,169 +420,172 @@ top_100_categories = category_counts_filtered_sorted.head(100)
 top_100_categories.head(11)
 </code></pre>
                     </details>
-                    </div>
-                    <samp>
-                        <table>
-                            <thead>
-                                <tr> <!-- Header row  -->
-                                    <th scope="col">category</th>
-                                    <th scope="col"> Jeopardy!</th>
-                                    <th scope="col">Double Jeopardy!</th>
-                                    <th scope="col">Final Jeopardy!</th>
-                                    <th scope="col">Total Appearances</th>
-                                    <th scope="col">Color label</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr> <!-- 1. row  -->
-                                    <td>BEFORE & AFTER</td>
-                                    <td>97</td>
-                                    <td>450</td>
-                                    <td>0</td>
-                                    <td>547</td>
-                                    <td>forestgreen</td>
-                                </tr>
-                                <tr> <!-- 2. row  -->
-                                    <td>SCIENCE</td>
-                                    <td>217</td>
-                                    <td>296</td>
-                                    <td>6</td>
-                                    <td>519</td>
-                                    <td>springgreen</td>
-                                </tr>
-                                <tr> <!-- 3. row  -->
-                                    <td>LITERATURE</td>
-                                    <td>105</td>
-                                    <td>381</td>
-                                    <td>10</td>
-                                    <td>496</td>
-                                    <td>orange</td>
-                                </tr>
-                                <tr> <!-- 4. row  -->
-                                    <td>AMERICAN HISTORY</td>
-                                    <td>227</td>
-                                    <td>174</td>
-                                    <td>17</td>
-                                    <td>418</td>
-                                    <td>peru</td>
-                                </tr>
-                                <tr> <!-- 5. row  -->
-                                    <td>POTPOURRI</td>
-                                    <td>255</td>
-                                    <td>146</td>
-                                    <td>0</td>
-                                    <td>401</td>
-                                    <td>coral</td>
-                                </tr>
-                                <tr> <!-- 6. row  -->
-                                    <td>WORLD HISTORY</td>
-                                    <td>129</td>
-                                    <td>237</td>
-                                    <td>11</td>
-                                    <td>377</td>
-                                    <td>cornflowerblue</td>
-                                </tr>
-                                <tr> <!-- 7. row  -->
-                                    <td>WORD ORIGINS</td>
-                                    <td>145</td>
-                                    <td>192</td>
-                                    <td>34</td>
-                                    <td>371</td>
-                                    <td>indigo</td>
-                                </tr>
-                                <tr> <!-- 8. row  -->
-                                    <td>COLLEGES & UNIVERSITIES</td>
-                                    <td>125</td>
-                                    <td>220</td>
-                                    <td>6</td>
-                                    <td>351</td>
-                                    <td>plum</td>
-                                </tr>
-                                <tr> <!-- 9. row  -->
-                                    <td>HISTORY</td>
-                                    <td>155</td>
-                                    <td>194</td>
-                                    <td>0</td>
-                                    <td>349</td>
-                                    <td>hotpink</td>
-                                </tr>
-                                <tr> <!-- 10. row  -->
-                                    <td>SPORTS</td>
-                                    <td>253</td>
-                                    <td>81</td>
-                                    <td>8</td>
-                                    <td>342</td>
-                                    <td>dodgerblue</td>
-                                </tr>
-                                <tr> <!-- 11. row  -->
-                                    <td>U.S. CITIES</td>
-                                    <td>195</td>
-                                    <td>125</td>
-                                    <td>19</td>
-                                    <td>339</td>
-                                    <td>lightgray</td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td></td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </samp>
-
-                    <details>
-                        <summary>Show code</summary>
-<pre><code class="language-python">
-#make a plot of the 3 round types with their top 100 occurring categories
-top_100_sorted_jeopardy = top_100_categories.sort_values(by=['Jeopardy!'], ascending=False)
-top_100_sorted_double = top_100_categories.sort_values(by=["Double Jeopardy!"], ascending=False)
-top_100_sorted_final = top_100_categories.sort_values(by=["Final Jeopardy!"], ascending=False)
-#make a list of the three dataframes for looping
-top_100_cat_variables_list = [top_100_sorted_jeopardy, top_100_sorted_double, top_100_sorted_final]
-
-fig = plt.figure(figsize=(18,18))
-fig.suptitle("Top 100 Categories in the TV show Jeopardy!\n 10 most frequent categories colorized", fontsize=22, y=0.96)
-fig.supylabel("Frequency", fontsize=13)
-
-for i, round_type in enumerate(top_100_cat_variables_list):
-    plt.subplot(3,1,i+1)
-    legend_patches = []
-    subplot = plt.bar(top_100_cat_variables_list[i].iloc[:,i].index, \
-                        top_100_cat_variables_list[i].iloc[:,i].values, color=top_100_cat_variables_list[i].iloc[:,4])
-    max_height = 0 #to adjust the y-axis for each subplot
-    for bar in subplot: #loop through each bar in the current plot
-        if bar.get_height() > max_height:
-            max_height = bar.get_height() #find and save the height of the heighest bar in each subplot
-        xlabels = [tick.get_text() for tick in plt.gca().get_xticklabels()] #get the tick labels as a list of category names for the current subplot
-        category_index = round(bar.get_x()) #get the x-coordinates of the bar on the x-axis
-        if 0 <= category_index <= len(xlabels): #if x-coordinate of the current bar is somewhere along the x-axis:
-            category_name = xlabels[category_index] #get the current x-label/category name
-            if category_name in list(top_10_categories_list) and bar.get_height() > 0: #make a legend patch if the current x-label is in top 10 list AND if the current round has a question in that category
-                patch = mpatches.Patch(color=bar.get_facecolor(), label=category_name)
-                legend_patches.append(patch)
-        plt.ylim((0, max_height + (max_height*20/100))) #increase y-axis by 20% in each subplot
-    plt.legend(handles=legend_patches, title=f"{len(legend_patches)} most frequent categories", loc="upper right", fontsize="small")
-    plt.title(f"Round type: {top_100_cat_variables_list[i].iloc[:,i].name}", fontsize=15, pad=10)
-    plt.xticks(rotation=90, fontsize=11)
-    plt.xlim((-1,100))
-    plt.subplots_adjust(hspace=1.125, left=0.06, right=0.9)
-
-plt.show()
-</code></pre>
-                    </details>
+                    </div> <!-- End code-container  -->
+                    <div class="table-container">
+                        <samp>
+                            <table>
+                                <thead>
+                                    <tr> <!-- Header row  -->
+                                        <th scope="col">category</th>
+                                        <th scope="col"> Jeopardy!</th>
+                                        <th scope="col">Double Jeopardy!</th>
+                                        <th scope="col">Final Jeopardy!</th>
+                                        <th scope="col">Total Appearances</th>
+                                        <th scope="col">Color label</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr> <!-- 1. row  -->
+                                        <td>BEFORE & AFTER</td>
+                                        <td>97</td>
+                                        <td>450</td>
+                                        <td>0</td>
+                                        <td>547</td>
+                                        <td>forestgreen</td>
+                                    </tr>
+                                    <tr> <!-- 2. row  -->
+                                        <td>SCIENCE</td>
+                                        <td>217</td>
+                                        <td>296</td>
+                                        <td>6</td>
+                                        <td>519</td>
+                                        <td>springgreen</td>
+                                    </tr>
+                                    <tr> <!-- 3. row  -->
+                                        <td>LITERATURE</td>
+                                        <td>105</td>
+                                        <td>381</td>
+                                        <td>10</td>
+                                        <td>496</td>
+                                        <td>orange</td>
+                                    </tr>
+                                    <tr> <!-- 4. row  -->
+                                        <td>AMERICAN HISTORY</td>
+                                        <td>227</td>
+                                        <td>174</td>
+                                        <td>17</td>
+                                        <td>418</td>
+                                        <td>peru</td>
+                                    </tr>
+                                    <tr> <!-- 5. row  -->
+                                        <td>POTPOURRI</td>
+                                        <td>255</td>
+                                        <td>146</td>
+                                        <td>0</td>
+                                        <td>401</td>
+                                        <td>coral</td>
+                                    </tr>
+                                    <tr> <!-- 6. row  -->
+                                        <td>WORLD HISTORY</td>
+                                        <td>129</td>
+                                        <td>237</td>
+                                        <td>11</td>
+                                        <td>377</td>
+                                        <td>cornflowerblue</td>
+                                    </tr>
+                                    <tr> <!-- 7. row  -->
+                                        <td>WORD ORIGINS</td>
+                                        <td>145</td>
+                                        <td>192</td>
+                                        <td>34</td>
+                                        <td>371</td>
+                                        <td>indigo</td>
+                                    </tr>
+                                    <tr> <!-- 8. row  -->
+                                        <td>COLLEGES & UNIVERSITIES</td>
+                                        <td>125</td>
+                                        <td>220</td>
+                                        <td>6</td>
+                                        <td>351</td>
+                                        <td>plum</td>
+                                    </tr>
+                                    <tr> <!-- 9. row  -->
+                                        <td>HISTORY</td>
+                                        <td>155</td>
+                                        <td>194</td>
+                                        <td>0</td>
+                                        <td>349</td>
+                                        <td>hotpink</td>
+                                    </tr>
+                                    <tr> <!-- 10. row  -->
+                                        <td>SPORTS</td>
+                                        <td>253</td>
+                                        <td>81</td>
+                                        <td>8</td>
+                                        <td>342</td>
+                                        <td>dodgerblue</td>
+                                    </tr>
+                                    <tr> <!-- 11. row  -->
+                                        <td>U.S. CITIES</td>
+                                        <td>195</td>
+                                        <td>125</td>
+                                        <td>19</td>
+                                        <td>339</td>
+                                        <td>lightgray</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </samp>
+                    </div>  <!--End table-container -->
+                    <div class="code-container">
+                        <details>
+                            <summary>Show code</summary>
+    <pre><code class="language-python">
+    #make a plot of the 3 round types with their top 100 occurring categories
+    top_100_sorted_jeopardy = top_100_categories.sort_values(by=['Jeopardy!'], ascending=False)
+    top_100_sorted_double = top_100_categories.sort_values(by=["Double Jeopardy!"], ascending=False)
+    top_100_sorted_final = top_100_categories.sort_values(by=["Final Jeopardy!"], ascending=False)
+    #make a list of the three dataframes for looping
+    top_100_cat_variables_list = [top_100_sorted_jeopardy, top_100_sorted_double, top_100_sorted_final]
+    
+    fig = plt.figure(figsize=(18,18))
+    fig.suptitle("Top 100 Categories in the TV show Jeopardy!\n 10 most frequent categories colorized", fontsize=22, y=0.96)
+    fig.supylabel("Frequency", fontsize=13)
+    
+    for i, round_type in enumerate(top_100_cat_variables_list):
+        plt.subplot(3,1,i+1)
+        legend_patches = []
+        subplot = plt.bar(top_100_cat_variables_list[i].iloc[:,i].index, \
+                            top_100_cat_variables_list[i].iloc[:,i].values, color=top_100_cat_variables_list[i].iloc[:,4])
+        max_height = 0 #to adjust the y-axis for each subplot
+        for bar in subplot: #loop through each bar in the current plot
+            if bar.get_height() > max_height:
+                max_height = bar.get_height() #find and save the height of the heighest bar in each subplot
+            xlabels = [tick.get_text() for tick in plt.gca().get_xticklabels()] #get the tick labels as a list of category names for the current subplot
+            category_index = round(bar.get_x()) #get the x-coordinates of the bar on the x-axis
+            if 0 <= category_index <= len(xlabels): #if x-coordinate of the current bar is somewhere along the x-axis:
+                category_name = xlabels[category_index] #get the current x-label/category name
+                if category_name in list(top_10_categories_list) and bar.get_height() > 0: #make a legend patch if the current x-label is in top 10 list AND if the current round has a question in that category
+                    patch = mpatches.Patch(color=bar.get_facecolor(), label=category_name)
+                    legend_patches.append(patch)
+            plt.ylim((0, max_height + (max_height*20/100))) #increase y-axis by 20% in each subplot
+        plt.legend(handles=legend_patches, title=f"{len(legend_patches)} most frequent categories", loc="upper right", fontsize="small")
+        plt.title(f"Round type: {top_100_cat_variables_list[i].iloc[:,i].name}", fontsize=15, pad=10)
+        plt.xticks(rotation=90, fontsize=11)
+        plt.xlim((-1,100))
+        plt.subplots_adjust(hspace=1.125, left=0.06, right=0.9)
+    
+    plt.show()
+    </code></pre>
+                        </details>
+                    </div>  <!--End code-container -->
                     <div class="image-container">
                         <img src="./resources/images/top_100_categories_each_round_legend_web.svg" alt="">
                     </div>
-                    
-                </div>
-            </section> <!--End rounds-overlapping-categories -->
+                </div> <!--End text-code-container -->
+            </section> <!--End text-code-section -->
+
             <section class="text-code-section">
                 <div class="text-code-container">
-                    <div class="text-container">
+                    <div class="text-container code">
                         <h3>Is there a difference in the prize value between the round types Jeopardy and Double Jeopardy?</h3>
                     </div>
-                    <div>
+                    <div class="code-container">
                         <details>
                             <summary>Show code</summary>
 <pre><code class="language-python">
@@ -627,16 +614,14 @@ for i, category in enumerate(top_10_categories_list, start=1): #loop through the
 plt.show()
 </code></pre>
                     </details>
+                </div> <!--End code-container -->
                     <div class="image-container">
                         <img src="./resources/images/top_10_categories_prize_distribution_round_web.svg" alt="">
                     </div>
-                    
-                </div>
-                </div>
-                <div class="text-container">
+                <div class="text-container code">
                     <h3>Is there a difference in the prize mean and median between the two round types?</h3>
                 </div>
-                <div>
+                <div class="code-container">
                     <details>
                         <summary>Show code</summary>
 <pre><code class="language-python">
@@ -667,26 +652,30 @@ if chi2_category_prize_median[1] < 0.05:
     print(f"The median prize value for each category differs significantly between rounds. P-value: {round(chi2_category_prize_median[1], 3)}")
 else:
     print("No significance was found")
-</code></pre>
-                    </details>
-                    <samp>The mean prize value for each category differs significantly between rounds of Jeopardy. P-value: 0.013</samp>
-                    <br>
-                    <samp>The median prize value for each category differs significantly between rounds Jeopardy. P-value: 0.011</samp>
-                </div>
-                <div>
-                    <p>Yes, there is a difference in prize value.</p>
-                </div>
 
-            </section> <!--End prize-distribution -->
+<pre><code class="language-plaintext">
+The mean prize value for each category differs significantly between rounds of Jeopardy. P-value: 0.013
+The median prize value for each category differs significantly between rounds Jeopardy. P-value: 0.011
+</code></pre>
+</code></pre>
+
+
+                    </details>
+                </div> <!--End code-container -->
+                <div class="text-container code">
+                    <p>Yes, there is a difference in prize value.</p>
+                </div> <!--End text-code-section -->
+            </section> <!--End text-code-section -->
+            
             <section class="text-code-section">
                 <div class="text-code-container">
-                    <div class="text-container">
+                    <div class="text-container code">
                         <h2>Exploring the dataset by year</h2>
                     </div>
-                    <div class="text-container">
+                    <div class="text-container code">
                         <h3>What is the max and median prize for each year?</h3>
                     </div>
-                    <div>
+                    <div class="code-container">
                         <details>
                             <summary>Show code</summary>
 <pre><code class="language-python">
@@ -714,22 +703,22 @@ plt.legend()
 plt.show()
 </code></pre>
                     </details>
+                </div> <!-- End code-container-->
                     <div class="image-container">
                         <img src="./resources/images/max_median_prize_year_web.svg" alt="">
                     </div>
-                    
-                </div>
-                </div>
-                <div>
-                    <h3>What was the most valuable answer? What was the question? And in what category?</h3>
-                </div>
-                <div>
+                    <div class="text-container code">
+                        <h3>What was the most valuable answer? What was the question? And in what category?</h3>
+                    </div>
+                    <div class="code-container">
                     <details>
                         <summary>Show code</summary>
 <pre><code class="language-python">
 jeopardy_data.sort_values(by=['value'], ascending=False).head(1)
 </code></pre>
                         </details>
+                    </div> <!-- End code-container-->
+                    <div class="table-container">
                         <samp>
                             <table>
                                 <thead>
@@ -765,11 +754,11 @@ jeopardy_data.sort_values(by=['value'], ascending=False).head(1)
                                 </tfoot>
                             </table>
                         </samp>
-                </div>
-                <div>
+                    </div> <!-- End table-container-->
+                <div class="text-container code">
                     <h3>How many categories are in each year? How many are unique?</h3>
                 </div>
-                <div>
+                <div class="code-container">
                     <details>
                         <summary>Show code</summary>
 <pre><code class="language-python">
@@ -799,19 +788,19 @@ plt.legend(fontsize="large")
 plt.show()
 </code></pre>
                     </details>
+                </div> <!--End code-container -->
                     <div class="image-container">
                         <img src="./resources/images/count_fraction_unique_category_year_web.svg" alt="">
                     </div>
-                    
-                </div>
-            </section> <!--End year -->
+                </div> <!--End text-code-container -->
+            </section> <!--End text-code-section -->
 
             <section class="text-code-section">
                 <div class="text-code-container">
-                    <div class="text-container">
+                    <div class="text-container code">
                         <h2>Does some categories have more re-occurring answers than others?</h2>
                     </div>
-                <div>
+                <div class="code-container">
                     <details>
                         <summary>Show code</summary>
 <pre><code class="language-python">
@@ -836,66 +825,64 @@ top_100_duplicate_answers_per_category_df_sorted = top_100_duplicate_answers_per
 top_100_duplicate_answers_per_category_df_sorted.head(5)
 </code></pre>
                      </details>
-                     </div>
-                    <samp>
-                        <table>
-                            <thead>
-                                <tr> <!-- Header row  -->
-                                    <th scope="col">category</th>
-                                    <th scope="col">answer_count</th>
-                                    <th scope="col">answer_unique_count</th>
-                                    <th scope="col">answer_duplicates</th>
-                                    <th scope="col">color_label</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr> <!-- 2. row  -->
-                                    <td>STATE CAPITALS</td>
-                                    <td>314</td>
-                                    <td>116</td>
-                                    <td>198</td>
-                                    <td>silver</td>
-                                </tr>
-                                <tr> <!-- 2. row  -->
-                                    <td>LANGUAGES</td>
-                                    <td>284</td>
-                                    <td>127</td>
-                                    <td>157</td>
-                                    <td>silver</td>
-                                </tr>
-                                <tr> <!-- 2. row  -->
-                                    <td>WORLD CAPITALS</td>
-                                    <td>300</td>
-                                    <td>151</td>
-                                    <td>149</td>
-                                    <td>silver</td>
-                                </tr>
-                                <tr> <!-- 2. row  -->
-                                    <td>SHAKESPEARE</td>
-                                    <td>294</td>
-                                    <td>146</td>
-                                    <td>148</td>
-                                    <td>silver</td>
-                                </tr>
-                                <tr> <!-- 2. row  -->
-                                    <td>U.S. CITIES</td>
-                                    <td>339</td>
-                                    <td>192</td>
-                                    <td>147</td>
-                                    <td>silver</td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td></td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </samp>
-                    <div>
+                     </div> <!-- End code-container  -->
+                     <div class="table-container">
+                        <samp>
+                            <table>
+                                <thead>
+                                    <tr> <!-- Header row  -->
+                                        <th scope="col">category</th>
+                                        <th scope="col">answer_count</th>
+                                        <th scope="col">answer_unique_count</th>
+                                        <th scope="col">answer_duplicates</th>
+                                        <th scope="col">color_label</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr> <!-- 2. row  -->
+                                        <td>STATE CAPITALS</td>
+                                        <td>314</td>
+                                        <td>116</td>
+                                        <td>198</td>
+                                        <td>silver</td>
+                                    </tr>
+                                    <tr> <!-- 2. row  -->
+                                        <td>LANGUAGES</td>
+                                        <td>284</td>
+                                        <td>127</td>
+                                        <td>157</td>
+                                        <td>silver</td>
+                                    </tr>
+                                    <tr> <!-- 2. row  -->
+                                        <td>WORLD CAPITALS</td>
+                                        <td>300</td>
+                                        <td>151</td>
+                                        <td>149</td>
+                                        <td>silver</td>
+                                    </tr>
+                                    <tr> <!-- 2. row  -->
+                                        <td>SHAKESPEARE</td>
+                                        <td>294</td>
+                                        <td>146</td>
+                                        <td>148</td>
+                                        <td>silver</td>
+                                    </tr>
+                                    <tr> <!-- 2. row  -->
+                                        <td>U.S. CITIES</td>
+                                        <td>339</td>
+                                        <td>192</td>
+                                        <td>147</td>
+                                        <td>silver</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </samp>
+                     </div> <!-- End table-container  -->
+                    
+                    <div class="text-container code">
                         <h3>Now make a plot to visualize it</h3>
                     </div>
-                    <div>
+                    <div class="code-container">
                         <details>
                             <summary>Show code</summary>
 <pre><code class="language-python">
@@ -933,21 +920,22 @@ plt.legend(handles=legend_patches, title="10 most frequent categories in Jeopard
 plt.show()
 </code></pre>
                         </details>
+                    </div><!-- End code-container-->
                         <div class="image-container">
                             <img src="./resources/images/top_100_categories_duplicate_answer_percent_web.svg" alt="">
                         </div>
-                        
+                </div> <!--End text-code-container -->
+            </section> <!--End text-code-section -->
+           
+            <section class="text-code-section">
+                <div class="text-code-container">
+                    <div class="text-container code">
+                        <h2>Let's explore Norway!</h2>
                     </div>
-                </div>
-            </section> <!--End answers -->
-            <section class="norway">
-                <div>
-                    <h2>Let's explore Norway!</h2>
-                </div>
-                <div>
-                    <h3>How many times per year was a question about Norway?</h3>
-                </div>
-                <div>
+                    <div class="text-container code">
+                        <h3>How many times per year was a question about Norway?</h3>
+                    </div>
+                <div class="code-container">
                     <details>
                         <summary>Show code</summary>
 <pre><code class="language-python">
@@ -965,20 +953,22 @@ plt.title("When and how many times \"Norway\" has been the answer to a question 
 plt.show()
 </code></pre>
                     </details>
+                </div> <!-- End code-container -->
                     <div class="image-container">
                         <img src="./resources/images/norway_as_answer_year_web.svg" alt="">
                     </div>
-                </div>
-                <div>
+                <div class="text-container code">
                     <h3>Let's extract the rows from 1989</h3>
                 </div>
-                <div>
+                <div class="code-container">
                     <details>
                         <summary>Show code</summary>
 <pre><code class="language-python">
 jeopardy_data[(jeopardy_data.answer == "norway") & (jeopardy_data.air_year == 1989)].sort_values(by=['value'], ascending=False)
 </code></pre>
                     </details>
+                </div> <!-- End code-container -->
+                <div class="table-container">
                     <samp>
                         <table>
                             <thead>
@@ -1018,26 +1008,23 @@ jeopardy_data[(jeopardy_data.answer == "norway") & (jeopardy_data.air_year == 19
                                     <td>norway</td>
                                 </tr>
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td></td>
-                                </tr>
-                            </tfoot>
                         </table>
                     </samp>
-                </div>
-                <div>
+                </div> <!-- End table-container -->
+                <div class="text-container code">
                     <h3>How valuable are the questions about Norway?</h3>
                 </div>
-                <div>
+                <div class="code-container">
                     <details>
                         <summary>Show code</summary>
 <pre><code class="language-python">
+# $3000 * 6.77 = 20310 kr (dollars to norwegian crowns conversion rate for 2005)
+
 norway_as_answer_prize = norway_as_answer.groupby(["value"], group_keys=True)[["answer"]].count()["answer"]
 
 fig = plt.figure(figsize=(13,5))
 plt.bar(norway_as_answer_prize.index, norway_as_answer_prize.values, width=70, color=norway_color_list, edgecolor="black")
-plt.annotate('Approximately 20.000 kr!', (3000, 1.5), xytext=(2250,10), fontsize=14, color='red', arrowprops=dict(arrowstyle="-|>", color="red")) #dollars to norwegian crowns conversion rate for 2005
+plt.annotate('Approximately 20.000 kr!', (3000, 1.5), xytext=(2250,10), fontsize=14, color='red', arrowprops=dict(arrowstyle="-|>", color="red")) 
 ax = plt.gca()
 ax.xaxis.set_major_formatter(mticker.FuncFormatter(lambda x, _: f"${int(x):,}".replace(",", ".")))
 plt.ylabel("Frequency")
@@ -1047,20 +1034,22 @@ plt.xlim((-50,3050))
 plt.show()
 </code></pre>
                     </details>
+                </div> <!-- End code-container -->
                     <div class="image-container">
                         <img src="./resources/images/norway_as_answer_prize_frequency_web.svg" alt="">
                     </div>
-                </div>
-                <div>
+                <div class="text-container code">
                     <h3>Let's check out the most valuable question</h3>
                 </div>
-                <div>
+                <div class="code-container">
                     <details>
                         <summary>Show code</summary>
 <pre><code class="language-python">
 jeopardy_data[jeopardy_data.answer == "norway"].sort_values(by=['value'], ascending=False).head(1)      
 </code></pre>
                     </details>
+                </div> <!-- End code-container -->
+                <div class="table-container">
                     <samp>
                         <table>
                             <thead>
@@ -1089,55 +1078,14 @@ jeopardy_data[jeopardy_data.answer == "norway"].sort_values(by=['value'], ascend
                                     <td>norway</td>
                                 </tr>
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td></td>
-                                </tr>
-                            </tfoot>
                         </table>
                     </samp>
-                </div>
-            </section>
+                </div> <!-- End table-container -->
+                </div> <!-- End text-code-container -->
+            </section> <!-- End text-code-section -->
         </main>
-
         <footer>
-
+            <p>Footer</p>
         </footer>
     </body>
 </html>
-
-
-
-
-
-
-
-<!-- <section class="title">
-    <div>
-        <h2>title</h2>
-    </div>
-    <div>
-        <details>
-            <summary>Show code</summary>
-<pre><code class="language-python">
-
-</code></pre>
-        </details>
-        <img src="#" alt="">
-    </div>
-</section> -->
-
-
-
-
-
-<!-- <details>
-    <summary>Show code</summary>
-    <pre><code class="language-python">
-
-    </code></pre>
-</details> -->
-
-<!-- <samp>
-
-</samp> -->
