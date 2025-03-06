@@ -56,7 +56,7 @@ p, ul {
 }
 
 .text-code-section {
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     margin: 0 0.5rem 1rem 0.5rem;
     border-radius: 10px;
@@ -90,9 +90,12 @@ p, ul {
 }
 
 .code-container {
+    display: flex;
     max-width: 100%;
+    /* width: 100%; */
     border-radius: 10px;
     /* padding: 0 1rem; */
+    justify-items: center;
 }
 
 code {
@@ -105,11 +108,11 @@ code {
     margin: 0;
 }
 
-details summary {
-    /* background-color: white; */
-    /* color: darkgrey; */
-    /* font-style: italic; */
-    /* padding: 2rem; */
+details {
+    max-width: 95%;
+}
+
+details > summary {
     width:100px;
     margin-bottom: 1rem;
     margin-left: 12.5%;
@@ -118,6 +121,12 @@ details summary {
     border: 2px solid black;
     border-radius: 10px;
     transition: background-color 250ms linear;
+    justify-items: left;
+}
+
+details:open > summary {
+    background-color: azure;
+    margin-left: 12.5%;
 }
 
     /* Jupyter Notebook orange */
@@ -139,10 +148,15 @@ every other row is gray */
 
 .table-container {
     padding: 1rem 0;
-    width: 100%;
+    max-width: 95%;
     display: flex;
-    /* background-color: white; */
-    justify-content: center;
+    justify-self: center;
+
+}
+
+samp table {
+    max-width: 100%;
+
 }
 
 table {
