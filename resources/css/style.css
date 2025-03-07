@@ -2,10 +2,12 @@
 
 html {
     font-family: "Open Sans", sans-serif;
+    background-color: #1f234a;
+    /* margin: 0; */
 }
 
 main {
-    background-color: #1f234a;
+    /* padding: 2rem 0; */
     padding-top: 2rem;
 }
 
@@ -58,7 +60,9 @@ p, ul {
 .text-code-section {
     /* display: flex; */
     justify-content: center;
-    margin: 0 0.5rem 1rem 0.5rem;
+    /* margin: 1rem 0.5rem 1rem 0.5rem; */
+    margin: 1rem;
+
     border-radius: 10px;
     background-color: #cdd5e6;
     /* justify-content: space-around; */
@@ -144,24 +148,25 @@ every other row is gray */
 
 .table-container {
     padding: 1rem 0;
-    max-width: 95%;
+    max-width: 100%;
     display: flex;
     justify-self: center;
-
+    margin: 0 1rem;
 }
 
-samp table {
-    max-width: 100%;
-
+.table-container > samp {
+    background-color: white;
+    border-radius: 10px;
+    /* padding-bottom: 0.25rem; */
 }
 
 table {
-    /* margin: 0 20px; */
-    padding: 5rem 0;
     background-color: white;
-    border-radius: 10px;
 }
 
+.table-container > samp {
+    overflow-x: auto;
+}
 
 th, td {
     text-align: right;
@@ -184,17 +189,15 @@ tbody tr:hover {
 .image-container {
     padding: 1rem;
     max-width: 100%;
-    /* justify-items: center; */
-    /* justify-content: center; */
-    /* justify-content: space-around; */
     text-align: center;
-    /* justify-self: center; */
 }
 
 img {
     border-radius: 10px;
-    /* max-width: 90%; */
-    max-width: 90%;
+    max-width: 100%;
     height: auto;
-    justify-self: center;
+}
+
+footer {
+    background-color: aliceblue;
 }
