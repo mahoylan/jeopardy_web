@@ -19,6 +19,7 @@
                 <div class="text-container">
                     <h1>About the project</h1>
                     <p>In following the <a href="https://www.codecademy.com/learn/paths/data-science-foundations">Data Science Foundation Skill Path</a> at <a href="https://www.codecademy.com/">Codecademy</a> I was tasked to test my newly learned data manipulation skills by exploring a datset of Jeopardy data. But before I could get started, Codecademy sent me to another course to learn <a href="https://www.codecademy.com/learn/practical-data-cleaning">how to clean data with Python</a> and down yet another skill path to <a href="https://www.codecademy.com/learn/paths/analyze-data-with-python">learn to analyze data with Python</a>. The last task in the Analyze data with Python skill path was to create a portfolio project, using Python and a dataset of my own choice. And thus I chose the jeopardy dataset <a href="jeopardy_csv.zip">(found here)</a>, hitting two birds with one stone. Even though I could have exported the Jupyter Notebook as a html-file, I chose to build this page from scratch using what I've learned about <a href="https://www.codecademy.com/learn/paths/learn-how-to-build-websites">HTML and CSS</a>.</p>
+
                     <h3>The project goals for the Analyze Data with Python Skill Path was</h3>
                         <ul>
                             <li>Create a project in <b>Jupyter Notebook</b></li>
@@ -26,6 +27,7 @@
                             <li>Make visualizations using <b>Matplotlib</b></li>
                             <li>Utilize hypothesis testing with <b>SciPy</b> and <b>statsmodels</b></li>
                         </ul>
+
                     <h3>The project goals for the Data Science Foundation Skill Path was</h3>
                         <ul>
                             <li>Write a function that filters the dataset for questions that contains all of the words in a list of words</li>
@@ -33,6 +35,7 @@
                             <li>Convert the " Value" column to floats. Find the "difficulty" of certain topics.</li>
                             <li>Write a function that returns the count of the unique answers to all of the questions in a dataset.</li>
                         </ul>
+
                     <p>I will spend most of this page on displaying code and plots from the Analyze data project as a website about functions is rather dull, although I did some of that as well. See the bottom of the page.</p>
                 </div>
             </section><!-- End about-project -->
@@ -43,7 +46,7 @@
                         <h2>Set up</h2>
                         <p>Read in the data from .csv into a pandas dataframe and import relevant modules</p>
                     </div>
-                    <div class="code-container">
+                    <div class="code-container"> 
                         <details>
                             <summary>Show code</summary>
 <pre><code class="language-python">
@@ -67,7 +70,7 @@ jeopardy_data = pd.read_csv('jeopardy.csv', na_filter=False)  #include na_filter
 jeopardy_data.head(5)
 </code></pre>
                         </details>
-                    </div>
+                    </div> <!-- End code-container -->
                     <div class="table-container">
                         <samp>
                             <table>
@@ -137,7 +140,7 @@ jeopardy_data.head(5)
                                 </tbody>
                             </table>
                         </samp>
-                    </div> <!-- End table-container container -->
+                    </div> <!-- End table-container -->
                 </div> <!--End text-code-container-->
             </section> <!--End text-code-section-->
 
@@ -145,7 +148,6 @@ jeopardy_data.head(5)
                 <div class="text-code-container">
                     <div class="text-container code">
                         <h2>Clean and prepare data</h2>
-                        <!-- <code>jeopardy_data.info()<br></code> -->
                         <ol>
                             <li>Rename columns</li>
                             <li>Fix type for Air Date and Value columns</li>
@@ -273,11 +275,6 @@ jeopardy_data.head(5)
                                         <td>john adams</td>
                                     </tr>
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td></td>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </samp>
                     </div> <!-- End table-container -->
@@ -355,8 +352,8 @@ plt.ylabel("Frequency")
 plt.ylim(top=650) 
 plt.xticks(rotation=45, ha="right") 
 plt.show()</code></pre>
-                    </details>
-                </div> <!--End code-container-->
+                        </details>
+                    </div> <!--End code-container-->
                     <div class="image-container">
                         <img src="./resources/images/top_10_most_frequent_categories.svg" alt="">
                     </div>
@@ -419,7 +416,7 @@ category_counts_filtered_sorted["Color label"] = color_labels
 top_100_categories = category_counts_filtered_sorted.head(100)
 top_100_categories.head(11)
 </code></pre>
-                    </details>
+                        </details>
                     </div> <!-- End code-container  -->
                     <div class="table-container">
                         <samp>
@@ -524,11 +521,6 @@ top_100_categories.head(11)
                                         <td>lightgray</td>
                                     </tr>
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td></td>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </samp>
                     </div>  <!--End table-container -->
@@ -613,17 +605,17 @@ for i, category in enumerate(top_10_categories_list, start=1): #loop through the
     plt.title(f"Category: {category}", fontsize=12)
 plt.show()
 </code></pre>
-                    </details>
-                </div> <!--End code-container -->
+                        </details>
+                    </div> <!--End code-container -->
                     <div class="image-container">
                         <img src="./resources/images/top_10_categories_prize_distribution_round_web.svg" alt="">
                     </div>
-                <div class="text-container code">
+                    <div class="text-container code">
                     <h3>Is there a difference in the prize mean and median between the two round types?</h3>
-                </div>
-                <div class="code-container">
-                    <details>
-                        <summary>Show code</summary>
+                    </div>
+                    <div class="code-container">
+                        <details>
+                            <summary>Show code</summary>
 <pre><code class="language-python">
 category_prize_table_mean = []
 category_prize_table_median = []
@@ -660,10 +652,11 @@ The median prize value for each category differs significantly between rounds Je
 </code></pre>
 
 
-                    </details>
-                </div> <!--End code-container -->
-                <div class="text-container code">
-                    <p>Yes, there is a difference in prize value.</p>
+                        </details>
+                    </div> <!--End code-container -->
+                    <div class="text-container code">
+                        <p>Yes, there is a difference in prize value.</p>
+                    </div>
                 </div> <!--End text-code-section -->
             </section> <!--End text-code-section -->
             
@@ -702,8 +695,8 @@ plt.xticks(jeopardy_data.groupby(["air_year"], group_keys=True)[["value"]].max()
 plt.legend()
 plt.show()
 </code></pre>
-                    </details>
-                </div> <!-- End code-container-->
+                        </details>
+                    </div> <!-- End code-container-->
                     <div class="image-container">
                         <img src="./resources/images/max_median_prize_year_web.svg" alt="">
                     </div>
@@ -711,8 +704,8 @@ plt.show()
                         <h3>What was the most valuable answer? What was the question? And in what category?</h3>
                     </div>
                     <div class="code-container">
-                    <details>
-                        <summary>Show code</summary>
+                        <details>
+                            <summary>Show code</summary>
 <pre><code class="language-python">
 jeopardy_data.sort_values(by=['value'], ascending=False).head(1)
 </code></pre>
@@ -747,20 +740,15 @@ jeopardy_data.sort_values(by=['value'], ascending=False).head(1)
                                         <td>suriname</td>
                                     </tr>
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td></td>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </samp>
                     </div> <!-- End table-container-->
-                <div class="text-container code">
-                    <h3>How many categories are in each year? How many are unique?</h3>
-                </div>
-                <div class="code-container">
-                    <details>
-                        <summary>Show code</summary>
+                    <div class="text-container code">
+                        <h3>How many categories are in each year? How many are unique?</h3>
+                    </div>
+                    <div class="code-container">
+                        <details>
+                            <summary>Show code</summary>
 <pre><code class="language-python">
 plt.figure(figsize=(18,5)) 
 plot_count_cat = plt.bar(jeopardy_data.groupby(["air_year"], group_keys=True)[["category"]].count().index, \
@@ -787,8 +775,8 @@ plt.xticks(jeopardy_data.groupby(["air_year"], group_keys=True)[["category"]].nu
 plt.legend(fontsize="large")
 plt.show()
 </code></pre>
-                    </details>
-                </div> <!--End code-container -->
+                        </details>
+                    </div> <!--End code-container -->
                     <div class="image-container">
                         <img src="./resources/images/count_fraction_unique_category_year_web.svg" alt="">
                     </div>
@@ -800,9 +788,9 @@ plt.show()
                     <div class="text-container code">
                         <h2>Does some categories have more re-occurring answers than others?</h2>
                     </div>
-                <div class="code-container">
-                    <details>
-                        <summary>Show code</summary>
+                    <div class="code-container">
+                        <details>
+                            <summary>Show code</summary>
 <pre><code class="language-python">
 # make a new dataframe
 
@@ -824,7 +812,7 @@ top_100_duplicate_answers_per_category_df["color_label"] = color_labels
 top_100_duplicate_answers_per_category_df_sorted = top_100_duplicate_answers_per_category_df.sort_values(by=['answer_duplicates'], ascending=False)
 top_100_duplicate_answers_per_category_df_sorted.head(5)
 </code></pre>
-                     </details>
+                        </details>
                      </div> <!-- End code-container  -->
                      <div class="table-container">
                         <samp>
@@ -935,9 +923,9 @@ plt.show()
                     <div class="text-container code">
                         <h3>How many times per year was a question about Norway?</h3>
                     </div>
-                <div class="code-container">
-                    <details>
-                        <summary>Show code</summary>
+                    <div class="code-container">
+                        <details>
+                            <summary>Show code</summary>
 <pre><code class="language-python">
 norway_as_answer = jeopardy_data[jeopardy_data.answer == "norway"]
 norway_as_answer_per_year = norway_as_answer.groupby(["air_year"], group_keys=True)[["answer"]].count()["answer"]
@@ -952,71 +940,71 @@ plt.ylabel("Frequency")
 plt.title("When and how many times \"Norway\" has been the answer to a question in Jeopardy")
 plt.show()
 </code></pre>
-                    </details>
-                </div> <!-- End code-container -->
+                        </details>
+                    </div> <!-- End code-container -->
                     <div class="image-container">
                         <img src="./resources/images/norway_as_answer_year_web.svg" alt="">
                     </div>
-                <div class="text-container code">
-                    <h3>Let's extract the rows from 1989</h3>
-                </div>
-                <div class="code-container">
-                    <details>
-                        <summary>Show code</summary>
+                    <div class="text-container code">
+                        <h3>Let's extract the rows from 1989</h3>
+                    </div>
+                    <div class="code-container">
+                        <details>
+                            <summary>Show code</summary>
 <pre><code class="language-python">
 jeopardy_data[(jeopardy_data.answer == "norway") & (jeopardy_data.air_year == 1989)].sort_values(by=['value'], ascending=False)
 </code></pre>
-                    </details>
-                </div> <!-- End code-container -->
-                <div class="table-container">
-                    <samp>
-                        <table>
-                            <thead>
-                                <tr> <!-- Header row  -->
-                                    <th></th>
-                                    <th scope="col">show_number</th>
-                                    <th scope="col">air_date</th>
-                                    <th scope="col">air_year</th>
-                                    <th scope="col">round_type</th>
-                                    <th scope="col">category</th>
-                                    <th scope="col">value</th>
-                                    <th scope="col">question</th>
-                                    <th scope="col">answer</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr> <!-- 2. row  -->
-                                    <td>81358</td>
-                                    <td>1230</td>
-                                    <td>1989-12-29</td>
-                                    <td>1989</td>
-                                    <td>Jeopardy!</td>
-                                    <td>NORTH ON THE MAP</td>
-                                    <td>500</td>
-                                    <td>north cape in this country is considered the most northerly point in europe</td>
-                                    <td>norway</td>
-                                </tr>
-                                <tr> <!-- 2. row  -->
-                                    <td>16537</td>
-                                    <td>1210</td>
-                                    <td>1989-12-01</td>
-                                    <td>1989</td>
-                                    <td>Jeopardy!</td>
-                                    <td>NATIONAL ANTHEMS</td>
-                                    <td>500</td>
-                                    <td>"yes, we love this land", sing the fjord dwellers of this country</td>
-                                    <td>norway</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </samp>
-                </div> <!-- End table-container -->
-                <div class="text-container code">
-                    <h3>How valuable are the questions about Norway?</h3>
-                </div>
-                <div class="code-container">
-                    <details>
-                        <summary>Show code</summary>
+                        </details>
+                    </div> <!-- End code-container -->
+                    <div class="table-container">
+                        <samp>
+                            <table>
+                                <thead>
+                                    <tr> <!-- Header row  -->
+                                        <th></th>
+                                        <th scope="col">show_number</th>
+                                        <th scope="col">air_date</th>
+                                        <th scope="col">air_year</th>
+                                        <th scope="col">round_type</th>
+                                        <th scope="col">category</th>
+                                        <th scope="col">value</th>
+                                        <th scope="col">question</th>
+                                        <th scope="col">answer</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr> <!-- 2. row  -->
+                                        <td>81358</td>
+                                        <td>1230</td>
+                                        <td>1989-12-29</td>
+                                        <td>1989</td>
+                                        <td>Jeopardy!</td>
+                                        <td>NORTH ON THE MAP</td>
+                                        <td>500</td>
+                                        <td>north cape in this country is considered the most northerly point in europe</td>
+                                        <td>norway</td>
+                                    </tr>
+                                    <tr> <!-- 2. row  -->
+                                        <td>16537</td>
+                                        <td>1210</td>
+                                        <td>1989-12-01</td>
+                                        <td>1989</td>
+                                        <td>Jeopardy!</td>
+                                        <td>NATIONAL ANTHEMS</td>
+                                        <td>500</td>
+                                        <td>"yes, we love this land", sing the fjord dwellers of this country</td>
+                                        <td>norway</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </samp>
+                    </div> <!-- End table-container -->
+                    <div class="text-container code">
+                        <h3>How valuable are the questions about Norway?</h3>
+                    </div>
+                    <div class="code-container">
+                        <details>
+                            <summary>Show code</summary>
 <pre><code class="language-python">
 # $3000 * 6.77 = 20310 kr (dollars to norwegian crowns conversion rate for 2005)
 
@@ -1033,57 +1021,58 @@ plt.title("Prize frequency for questions about Norway")
 plt.xlim((-50,3050))
 plt.show()
 </code></pre>
-                    </details>
-                </div> <!-- End code-container -->
+                        </details>
+                    </div> <!-- End code-container -->
                     <div class="image-container">
                         <img src="./resources/images/norway_as_answer_prize_frequency_web.svg" alt="">
                     </div>
-                <div class="text-container code">
-                    <h3>Let's check out the most valuable question</h3>
-                </div>
-                <div class="code-container">
-                    <details>
-                        <summary>Show code</summary>
+                    <div class="text-container code">
+                        <h3>Let's check out the most valuable question</h3>
+                    </div>
+                    <div class="code-container">
+                        <details>
+                            <summary>Show code</summary>
 <pre><code class="language-python">
 jeopardy_data[jeopardy_data.answer == "norway"].sort_values(by=['value'], ascending=False).head(1)      
 </code></pre>
-                    </details>
-                </div> <!-- End code-container -->
-                <div class="table-container">
-                    <samp>
-                        <table>
-                            <thead>
-                                <tr> <!-- Header row  -->
-                                    <th></th>
-                                    <th scope="col">show_number</th>
-                                    <th scope="col">air_date</th>
-                                    <th scope="col">air_year</th>
-                                    <th scope="col">round_type</th>
-                                    <th scope="col">category</th>
-                                    <th scope="col">value</th>
-                                    <th scope="col">question</th>
-                                    <th scope="col">answer</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr> <!-- 2. row  -->
-                                    <td>181164</td>
-                                    <td>4872</td>
-                                    <td>2005-11-15</td>
-                                    <td>2005</td>
-                                    <td>Double Jeopardy!</td>
-                                    <td>COMPOSERS</td>
-                                    <td>3000</td>
-                                    <td>rikard nordraak, who composed this country's national anthem, was a friend of edvard grieg</td>
-                                    <td>norway</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </samp>
-                </div> <!-- End table-container -->
+                        </details>
+                    </div> <!-- End code-container -->
+                    <div class="table-container">
+                        <samp>
+                            <table>
+                                <thead>
+                                    <tr> <!-- Header row  -->
+                                        <th></th>
+                                        <th scope="col">show_number</th>
+                                        <th scope="col">air_date</th>
+                                        <th scope="col">air_year</th>
+                                        <th scope="col">round_type</th>
+                                        <th scope="col">category</th>
+                                        <th scope="col">value</th>
+                                        <th scope="col">question</th>
+                                        <th scope="col">answer</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr> <!-- 2. row  -->
+                                        <td>181164</td>
+                                        <td>4872</td>
+                                        <td>2005-11-15</td>
+                                        <td>2005</td>
+                                        <td>Double Jeopardy!</td>
+                                        <td>COMPOSERS</td>
+                                        <td>3000</td>
+                                        <td>rikard nordraak, who composed this country's national anthem, was a friend of edvard grieg</td>
+                                        <td>norway</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </samp>
+                    </div> <!-- End table-container -->
                 </div> <!-- End text-code-container -->
             </section> <!-- End text-code-section -->
         </main>
+        
         <footer>
             <p>Footer</p>
         </footer>

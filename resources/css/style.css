@@ -89,27 +89,21 @@ p, ul {
     padding-left: 1rem;
 }
 
-.code-container {
-    display: flex;
-    max-width: 100%;
-    /* width: 100%; */
-    border-radius: 10px;
-    /* padding: 0 1rem; */
-    justify-items: center;
+    /* Jupyter Notebook orange */
+    /* background-color: hsl(24, 90%, 55%); */ 
+
+summary:hover {
+    background-color: hsl(24, 90%, 60%);
+    /* background: linear-gradient(#f5aeae, #b5bbff); */
 }
 
-code {
-    border-radius: 10px;
-    margin-top: 1rem;
-    margin: 0 1rem;
+details:open > summary {
+    background-color: hsl(24, 90%, 60%);
+    /* margin-left: 12.5%; */
 }
 
-.chatgpt code {
-    margin: 0;
-}
-
-details {
-    max-width: 95%;
+summary:active {
+    box-shadow: 2px 2px 5px black;
 }
 
 details > summary {
@@ -121,24 +115,26 @@ details > summary {
     border: 2px solid black;
     border-radius: 10px;
     transition: background-color 250ms linear;
-    justify-items: left;
+    /* justify-items: left; */
 }
 
-details:open > summary {
-    background-color: azure;
-    margin-left: 12.5%;
+.code-container {
+    /* display: flex; */
+    /* max-width: 100%; */
+    /* width: 100%; */
+    border-radius: 10px;
+    /* padding: 0 1rem; */
+    /* justify-items: center; */
 }
 
-    /* Jupyter Notebook orange */
-    /* background-color: hsl(24, 90%, 55%); */ 
-
-.code-container summary:hover {
-    background-color: hsl(24, 90%, 60%);
-    /* background: linear-gradient(#f5aeae, #b5bbff); */
+code {
+    border-radius: 10px;
+    margin-top: 1rem;
+    margin: 0 1rem;
 }
 
-.code-container summary:active {
-    box-shadow: 2px 2px 5px black;
+.chatgpt code {
+    margin: 0;
 }
 
 /* align tabel right
