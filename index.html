@@ -50,18 +50,18 @@
                         <details>
                             <summary>Show code</summary>
 <pre><code class="language-python">
+import warnings #imported to ignore a regex warning
 import pandas as pd
 import numpy as np
-import re
-#import matplotlib.colors as mcolors
+#import re
 import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
-#import seaborn as sns
 from matplotlib.lines import Line2D
-from scipy.stats import chi2_contingency
-#from scipy.stats import ttest_ind
-    
+import scipy.stats as stats
+from statsmodels.stats.anova import anova_lm
+from statsmodels.formula.api import ols, gls
+
 %matplotlib inline
 plt.style.use('default')
 pd.set_option('display.max_colwidth', None)
@@ -569,6 +569,37 @@ top_100_categories.head(11)
                     <div class="image-container">
                         <img src="./resources/images/top_100_categories_each_round_legend_web.svg" alt="">
                     </div>
+                    <div class="text-container code">
+                        <h3>Is there a difference in the how often a specific category appears in a certain round of Jeopardy?</h3>
+                        </div>
+                    <div class="code-container">
+                        <details>
+                            <summary>Show code</summary>
+<pre><code class="language-python">
+count_table = []
+
+for i, category in enumerate(top_100_categories[:100].index):
+    count_list = []
+    for j, column in enumerate(top_100_categories.loc[:, "Jeopardy!":"Final Jeopardy!"]): # [:, col1:col2] signifies to keep all rows, but slice columns
+        count = top_100_categories.iloc[:,j].values[i]
+        count_list.append(count)
+    count_table.append(count_list)
+
+chi2_category_count = stats.chi2_contingency(count_table)
+
+if chi2_category_count[1] < 0.05:
+    print(f"The category count for the top 100 categories differs significantly between rounds. P-value: {round(chi2_category_count[1], 3)}")
+else:
+    print("No significance was found")
+<pre><code class="language-plaintext">
+The category count for the top 100 categories differs significantly between rounds. P-value: 0.0
+</code></pre>
+</code></pre>
+                        </details>
+                    </div> <!--End code-container -->
+                    <div class="text-container code">
+                        <p>The probalility for the difference being attributed to random chance is below 5%. Therefore we can conclude that yes, there is indeed a difference how often the different categories appear in each round.</p>
+                    </div>
                 </div> <!--End text-code-container -->
             </section> <!--End text-code-section -->
 
@@ -611,51 +642,21 @@ plt.show()
                         <img src="./resources/images/top_10_categories_prize_distribution_round_web.svg" alt="">
                     </div>
                     <div class="text-container code">
-                    <h3>Is there a difference in the prize mean and median between the two round types?</h3>
+                    <h3>Is there a difference in the mean prize value between Jeopardy and Double Jeopardy rounds?</h3>
                     </div>
                     <div class="code-container">
                         <details>
                             <summary>Show code</summary>
 <pre><code class="language-python">
-category_prize_table_mean = []
-category_prize_table_median = []
-    
-for category in top_10_categories_list:
-    prize_list_mean = []
-    prize_list_median = []
-    for round_type in list(["Jeopardy!", "Double Jeopardy!"]):
-        prize = jeopardy_data[(jeopardy_data.category == category) & (jeopardy_data.round_type == round_type)]["value"].to_numpy()
-        prize_mean = np.mean(prize)
-        prize_median = np.median(prize)
-        prize_list_mean.append(prize_mean)
-        prize_list_median.append(prize_median)
-    category_prize_table_mean.append(prize_list_mean)
-    category_prize_table_median.append(prize_list_median)
-    
-chi2_category_prize_mean = chi2_contingency(category_prize_table_mean)
-chi2_category_prize_median = chi2_contingency(category_prize_table_median)
-    
-if chi2_category_prize_mean[1] < 0.05: #extract the p-value from the test output
-    print(f"The mean prize value for each category differs significantly between rounds. P-value: {round(chi2_category_prize_mean[1], 3)}")
-else:
-    print("No significance was found")
-    
-if chi2_category_prize_median[1] < 0.05:
-    print(f"The median prize value for each category differs significantly between rounds. P-value: {round(chi2_category_prize_median[1], 3)}")
-else:
-    print("No significance was found")
 
 <pre><code class="language-plaintext">
-The mean prize value for each category differs significantly between rounds of Jeopardy. P-value: 0.013
-The median prize value for each category differs significantly between rounds Jeopardy. P-value: 0.011
+
 </code></pre>
 </code></pre>
-
-
                         </details>
                     </div> <!--End code-container -->
                     <div class="text-container code">
-                        <p>Yes, there is a difference in prize value.</p>
+                        <p>The probalility for the difference being attributed to random chance is below 5%. Therefore we can conclude that yes, there is indeed a difference in prize value between the two rounds.</p>
                     </div>
                 </div> <!--End text-code-section -->
             </section> <!--End text-code-section -->
@@ -1071,11 +1072,266 @@ jeopardy_data[jeopardy_data.answer == "norway"].sort_values(by=['value'], ascend
                     </div> <!-- End table-container -->
                 </div> <!-- End text-code-container -->
             </section> <!-- End text-code-section -->
+
+            <section class="text-code-section functions">
+                <div class="text-code-container">
+                    <div class="text-container code">
+                        <h2>Tasks for the Data Science Foundation Skill Path</h2>
+                        <h3>Write a function that filters the dataset for questions that contains all of the words in a list of words.</h3>
+                    </div>
+                    <div class="code-container">
+                        <details>
+                            <summary>Show code</summary>
+<pre><code class="language-python">
+def question_search(user_list):
+    words_string = r"(.*\s|^)"
+    for i in range(len(user_list)):
+        words_string += user_list[i]
+        if i+1 < len(user_list):
+            words_string += r"(\W\w\s|\s|\s.*\s)"
+        else:
+            words_string += r"(\W\w\s|\s.*|$)"
+    return jeopardy_data[jeopardy_data["question"].str.contains(words_string, regex=True, na=False)]
+
+warnings.filterwarnings("ignore", 'This pattern is interpreted as a regular expression, and has match groups. To actually get the groups, use str.extract.')
+
+user_list = input("Input words seperated by space:").split()
+question_search(user_list)
+</code></pre>
+<pre><code class="language-plaintext">
+Input words seperated by space: formula one
+</code></pre>
+                        </details>
+                    </div> <!-- End code-container -->
+                    <div class="table-container">
+                        <samp>
+                            <table>
+                                <thead>
+                                    <tr> <!-- Header row  -->
+                                        <th></th>
+                                        <th scope="col">show_number</th>
+                                        <th scope="col">air_date</th>
+                                        <th scope="col">air_year</th>
+                                        <th scope="col">round_type</th>
+                                        <th scope="col">category</th>
+                                        <th scope="col">value</th>
+                                        <th scope="col">question</th>
+                                        <th scope="col">answer</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr> <!-- 1. row  -->
+                                        <td>24686</td>
+                                        <td>5487</td>
+                                        <td>2008-06-17</td>
+                                        <td>2008</td>
+                                        <td>Double Jeopardy!</td>
+                                        <td>YOU'RE PROPANE</td>
+                                        <td>1600</td>
+                                        <td>propane's chemical formula is c<sub>3</sub>h<sub>8</sub>, meaning it's one of these compounds named for its 2 components</td>
+                                        <td>a hydrocarbon</td>
+                                    </tr>
+                                    <tr> <!-- 2. row  -->
+                                        <td>61520</td>
+                                        <td>5022</td>
+                                        <td>2006-06-13</td>
+                                        <td>2006</td>
+                                        <td>Double Jeopardy!</td>
+                                        <td>GEOLOGY</td>
+                                        <td>2000</td>
+                                        <td>the name of the mineral with formula fe<sub>3</sub>o<sub>4</sub> should tell you that it acts as a natural one of these</td>
+                                        <td>a magnet</td>
+                                    </tr>
+                                    <tr> <!-- 3. row  -->
+                                        <td>109945</td>
+                                        <td>4776</td>
+                                        <td>2005-05-16</td>
+                                        <td>2005</td>
+                                        <td>Jeopardy!</td>
+                                        <td>OF CHAMPIONS</td>
+                                        <td>1000</td>
+                                        <td>formula one champion ayrton senna from this south american country began driving at age 4</td>
+                                        <td>brazil</td>
+                                    </tr>
+                                    <tr> <!-- 4. row  -->
+                                        <td>178833</td>
+                                        <td>2865</td>
+                                        <td>1997-01-31</td>
+                                        <td>1997</td>
+                                        <td>Double Jeopardy!</td>
+                                        <td>THE 1980S</td>
+                                        <td>200</td>
+                                        <td>in april 1985 this company announced it was replacing its 99-year-old formula with a sweeter one</td>
+                                        <td>coca-cola</td>
+                                    </tr>
+                                    <tr> <!-- 5. row  -->
+                                        <td>200155</td>
+                                        <td>5804</td>
+                                        <td>2009-12-03</td>
+                                        <td>2009</td>
+                                        <td>Double Jeopardy!</td>
+                                        <td>MATH</td>
+                                        <td>800</td>
+                                        <td>the formula to find the area of one of these is 1/2 base times height</td>
+                                        <td>a triangle</td>
+                                    </tr>
+                                    <tr> <!-- 5. row  -->
+                                        <td>200202</td>
+                                        <td>3766</td>
+                                        <td>2001-01-08</td>
+                                        <td>2001</td>
+                                        <td>Jeopardy!</td>
+                                        <td>A STEW OF STEWARTS</td>
+                                        <td>400</td>
+                                        <td>this scottish formula one racer was sports illustrated's sportsman of the year in 1973</td>
+                                        <td>jackie stewart</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </samp>
+                    </div> <!-- End table-container -->
+                    <div class="text-container code">
+                        <h3>Find out the "difficulty" of a topic. I.e. what is the average value of questions that contain specific words?</h3>
+                    </div>
+                    <div class="code-container">
+                        <details>
+                            <summary>Show code</summary>
+<pre><code class="language-python">
+def filtered_info(filtered_dataframe):
+    print("Count questions:", len(filtered_dataframe))
+    print("Count unique categories:", filtered_dataframe["category"].nunique())
+    print("Mean prize for questions:", round(filtered_dataframe.value.mean(), 2))
+    print("Median prize for questions:", filtered_dataframe.value.median())
+    print("Most valuable question:", filtered_dataframe.value.max())
+    print("The most valuable question was:\n\n", filtered_dataframe.sort_values(by=["value"], ascending=False).iat[0, 6])
+
+filter_question_beer = question_search(["beer"])
+filter_question_coffee = question_search(["coffee"])
+filter_question_cheese = question_search(["cheese"])
+
+print("Questions about beer:")
+filtered_info(filter_question_beer)
+print("\nQuestions about coffee:")
+filtered_info(filter_question_coffee)
+print("\nQuestions about cheese:")
+filtered_info(filter_question_cheese)
+</code></pre>
+<pre><code class="language-plaintext">
+Questions about beer:
+Count questions: 245
+Count unique categories: 189
+Mean prize for questions: 641.63
+Median prize for questions: 500.0
+Most valuable question: 3500
+The most valuable question was:
+
+    if you like big beer gardens, head for the hirschgarten in this german city; it seats about 8,000
+
+Questions about coffee:
+Count questions: 208
+Count unique categories: 155
+Mean prize for questions: 693.27
+Median prize for questions: 600.0
+Most valuable question: 3000
+The most valuable question was:
+
+    after her coffee plantation failed, this author got out of africa & returned to denmark
+
+Questions about cheese:
+Count questions: 335
+Count unique categories: 224
+Mean prize for questions: 649.55
+Median prize for questions: 400.0
+Most valuable question: 6000
+The most valuable question was:
+
+    the creation of this cheese in the 1900s is credited to a man named david from the central coast of california
+</code></pre>
+                        </details>
+                    </div> <!-- End code-container -->
+                    <div class="text-container code">
+                        <p>After investigating the words "beer", "coffee" and "cheese", I found that the most valuable question belonged to cheese, the highest average prize value belonged to coffee and beer there was a question about beer in 189 different categories.</p>
+                    </div>
+                    <div class="text-container code">
+                        <h3>Write a function that returns the count of unique answers to all of the questions in a dataset.</h3>
+                    </div>
+                    <div class="code-container">
+                        <details>
+                            <summary>Show code</summary>
+<pre><code class="language-python">
+def count_unique_answers(filtered_dataframe):
+return filtered_dataframe["answer"].value_counts()
+
+filter_question_david_lynch = question_search(["david", "lynch"])
+count_unique_answers(filter_question_david_lynch)
+</code></pre>
+<pre><code class="language-plaintext">
+answer
+dune                2
+twin peaks          2
+blue velvet         1
+eraserhead          1
+mulholland drive    1
+the elephant man    1
+laura palmer        1
+wild at heart       1
+Name: count, dtype: Int64
+</code></pre>
+                        </details>
+                    </div> <!-- End code-container -->
+                    <div class="table-container">
+                        <samp>
+                            <table>
+                                <thead>
+                                    <tr> <!-- Header row  -->
+                                        <th scope="col">answer</th>
+                                        <th scope="col">count</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr> <!-- 1. row  -->
+                                        <td>dune</td>
+                                        <td>2</td>
+                                    </tr>
+                                    <tr> <!-- 2. row  -->
+                                        <td>twin peaks</td>
+                                        <td>2</td>
+                                    </tr>
+                                    <tr> <!-- 3. row  -->
+                                        <td>blue velvet</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr> <!-- 4. row  -->
+                                        <td>eraserhead</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr> <!-- 5. row  -->
+                                        <td>mulholland drive</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr> <!-- 6. row  -->
+                                        <td>the elephant man</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr> <!-- 7. row  -->
+                                        <td>laura palmer</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr> <!-- 8. row  -->
+                                        <td>wild at heart</td>
+                                        <td>1</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </samp>
+                    </div> <!-- End text-code-container -->
+                </div> <!-- End table-container -->
+            </section> <!-- End text-code-section -->
         </main>
         
         <footer>
             <p>Footer</p>
         </footer>
-        
+
     </body>
 </html>

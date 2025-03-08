@@ -2,6 +2,9 @@
 
 html {
     font-family: "Open Sans", sans-serif;
+}
+
+body {
     background-color: #1f234a;
 }
 
@@ -58,6 +61,10 @@ p, ul {
     border-radius: 10px;
     background-color: #cdd5e6;
 
+}
+
+.text-code-section.functions {
+    background-color: #cbe4e8;
 }
 
 .text-container.code {
