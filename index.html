@@ -358,9 +358,6 @@ plt.show()</code></pre>
                         <img src="./resources/images/top_10_most_frequent_categories.svg" alt="">
                     </div>
                 </div> <!--End text-code-container-->
-            </section> <!--End text-code-section-->
-
-            <section class="text-code-section">
                 <div class="text-code-container">
                     <div class="text-container code">
                         <h3>What categories are most predominant in the different rounds of Jeopardy?</h3>
@@ -601,48 +598,7 @@ The category count for the top 100 categories differs significantly between roun
                         <p>The probability for the observed difference being attributed to random chance is below 5%. Therefore we can conclude that yes, there is indeed a difference how often the various categories appear in each round.</p>
                     </div>
                 </div> <!--End text-code-container -->
-            </section> <!--End text-code-section -->
-
-            <section class="text-code-section">
-                <div class="text-code-container">
-                    <div class="text-container code">
-                        <h3>How are the prize values distributed between the round types Jeopardy and Double Jeopardy for the top 10 categories?</h3>
-                    </div>
-                    <div class="code-container">
-                        <details>
-                            <summary>Show code</summary>
-<pre><code class="language-python">
-#make a dataframe with only categories shared between the round types Jeopardy and Double Jeropardy
-overlapping_categories_jeopardy_double = jeopardy_data[jeopardy_data["category"].isin(shared_jeopardy_double)]
-
-#divide into dataframes based on round type
-jeopardy_categories_prize = overlapping_categories_jeopardy_double[overlapping_categories_jeopardy_double.round_type == "Jeopardy!"]
-double_categories_prize = overlapping_categories_jeopardy_double[overlapping_categories_jeopardy_double.round_type == "Double Jeopardy!"]
-
-fig = plt.figure(figsize=(16,10), tight_layout=True) 
-fig.suptitle("Prize distribution of the top 10 occurring categories\n for the round types Jeopardy and Double Jeopardy", fontsize=20, y=1)
-fig.supylabel("Prize value", fontsize=15)
-for i, category in enumerate(top_10_categories_list, start=1): #loop through the top 10 categories list
-    plt.subplot(2,5,i)
-    plt.boxplot([jeopardy_categories_prize[jeopardy_categories_prize.category == category]["value"].to_numpy(), \ #in jeopardy round, find the current category, extract the value and convert to numpy
-                 double_categories_prize[double_categories_prize.category == category]["value"].to_numpy()], \ #in double jeopardy round, find the current category, extract the value and convert to numpy
-                vert=True, widths=0.6, showmeans=True, meanline=True, tick_labels=("Jeopardy!", "Double Jeopardy!"))
-    ax = plt.gca() #get current axis
-    ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda x, _: f"${int(x):,}".replace(",", "."))) #add a $ in front of the y-ticks and replace thousands seperator with dot
-    legend_elements = [ #add a custom made legend to each subplot
-                    Line2D([0], [0], color="darkorange", label="Median"),
-                    Line2D([0], [0], color="green", linestyle="--", label="Mean")]
-    plt.legend(handles=legend_elements, loc="upper left")
-    plt.title(f"Category: {category}", fontsize=12)
-plt.show()
-</code></pre>
-                        </details>
-                    </div> <!--End code-container -->
-                    <div class="image-container">
-                        <img src="./resources/images/top_10_categories_prize_distribution_round_web.svg" alt="">
-                    </div>
-                </div> <!--End text-code-section -->
-            </section> <!--End text-code-section -->
+            </section> <!--End text-code-section-->
             
             <section class="text-code-section">
                 <div class="text-code-container">
@@ -766,6 +722,49 @@ plt.show()
                     </div>
                 </div> <!--End text-code-container -->
             </section> <!--End text-code-section -->
+
+            <section class="text-code-section">
+                <div class="text-code-container">
+                    <div class="text-container code">
+                        <h3>How are the prize values distributed between the round types Jeopardy and Double Jeopardy for the top 10 categories?</h3>
+                    </div>
+                    <div class="code-container">
+                        <details>
+                            <summary>Show code</summary>
+<pre><code class="language-python">
+#make a dataframe with only categories shared between the round types Jeopardy and Double Jeropardy
+overlapping_categories_jeopardy_double = jeopardy_data[jeopardy_data["category"].isin(shared_jeopardy_double)]
+
+#divide into dataframes based on round type
+jeopardy_categories_prize = overlapping_categories_jeopardy_double[overlapping_categories_jeopardy_double.round_type == "Jeopardy!"]
+double_categories_prize = overlapping_categories_jeopardy_double[overlapping_categories_jeopardy_double.round_type == "Double Jeopardy!"]
+
+fig = plt.figure(figsize=(16,10), tight_layout=True) 
+fig.suptitle("Prize distribution of the top 10 occurring categories\n for the round types Jeopardy and Double Jeopardy", fontsize=20, y=1)
+fig.supylabel("Prize value", fontsize=15)
+for i, category in enumerate(top_10_categories_list, start=1): #loop through the top 10 categories list
+    plt.subplot(2,5,i)
+    plt.boxplot([jeopardy_categories_prize[jeopardy_categories_prize.category == category]["value"].to_numpy(), \ #in jeopardy round, find the current category, extract the value and convert to numpy
+                 double_categories_prize[double_categories_prize.category == category]["value"].to_numpy()], \ #in double jeopardy round, find the current category, extract the value and convert to numpy
+                vert=True, widths=0.6, showmeans=True, meanline=True, tick_labels=("Jeopardy!", "Double Jeopardy!"))
+    ax = plt.gca() #get current axis
+    ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda x, _: f"${int(x):,}".replace(",", "."))) #add a $ in front of the y-ticks and replace thousands seperator with dot
+    legend_elements = [ #add a custom made legend to each subplot
+                    Line2D([0], [0], color="darkorange", label="Median"),
+                    Line2D([0], [0], color="green", linestyle="--", label="Mean")]
+    plt.legend(handles=legend_elements, loc="upper left")
+    plt.title(f"Category: {category}", fontsize=12)
+plt.show()
+</code></pre>
+                        </details>
+                    </div> <!--End code-container -->
+                    <div class="image-container">
+                        <img src="./resources/images/top_10_categories_prize_distribution_round_web.svg" alt="">
+                    </div>
+                </div> <!--End text-code-section -->
+            </section> <!--End text-code-section -->
+            
+           
 
             <section class="text-code-section">
                 <div class="text-code-container">
