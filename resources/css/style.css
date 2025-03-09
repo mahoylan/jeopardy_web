@@ -42,6 +42,7 @@ p, ul {
 
 .text-only-section {
     /* display: flex; */
+    padding-top: 1rem;
     justify-self: center;
     margin-bottom: 1rem;
     border-radius: 10px;
@@ -52,10 +53,11 @@ p, ul {
 .text-container {
     justify-items: left;
     border-radius: 10px;
-    padding: 3rem 3rem 1rem 3rem;
+    padding: 1rem 3rem 1rem 3rem;
 }
 
 .text-code-section {
+    padding-top: 1rem;
     justify-content: center;
     margin: 1rem;
     border-radius: 10px;
@@ -182,5 +184,7 @@ img {
 }
 
 footer {
-    background-color: aliceblue;
+    margin: 1rem;
+    background-color: #1f234a;
+    color: white;
 }
