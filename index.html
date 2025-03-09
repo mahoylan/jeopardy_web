@@ -36,7 +36,7 @@
                             <li>Write a function that returns the count of the unique answers to all of the questions in a dataset.</li>
                         </ul>
 
-                    <p>I will spend most of this page on displaying code and plots from the Analyze data project as a website about functions is rather dull, although I did some of that as well. See the bottom of the page.</p>
+                    <p>I will spend most of this page on displaying code and plots from the Analyze data project as a website about functions is rather dull, although I did some of that as well. <a href="#functions">See the bottom of the page</a>.</p>
                 </div>
             </section><!-- End about-project -->
 
@@ -288,17 +288,17 @@ jeopardy_data.head(5)
                         "Good day! I have a dataset from the TV show Jeopardy that I'm analyzing with Python in Jupyter Notebook. I've loaded the dataset into a pandas dataframe and called it jeopardy_data. Each row is a question. The columns contain 'show_number' (integer), 'air_date' (string of date of air), 'round_type' (what type of round it was, either 'Jeopardy!' 'Double Jeopardy!' 'Final Jeopardy!' 'Tiebreaker'), 'category' (what category the question belongs to), 'value' (prize value of the question), 'question' (the question), 'answer' (the answer). Can you brainstorm 5 ideas of how to explore and analyze the dataset?"</p>
                     <p>ChatGPT's answer: <br>
                         <ol>
-                            <li>Most Common Categories</li>
+                            <li><a href="#most_common_categories">Most Common Categories</a></li>
                             <ul>
                                 <li>Find the most frequently occurring categories and visualize them using a bar chart.</li>
                                 <li>Check if certain categories appear more in specific rounds (e.g., are some categories more common in Final Jeopardy?).</li>
                             </ul> <br>
-                            <li>Trends Over Time</li>
+                            <li><a href="#time">Trends Over Time</a></li>
                             <ul>
                                 <li>Convert <code>air_date</code> to a datetime format and analyze trends in question values over time.</li>
                                 <li>Look at the frequency of different categories or question difficulty (value) by year or decade.</li>
                             </ul> <br>
-                            <li>Question Difficulty Analysis</li>
+                            <li><a href="#prize">Question Difficulty Analysis</a></li>
                             <ul>
                                 <li>Clean the <code>value</code> column (convert to numeric, handle "Final Jeopardy!" which may not have a set value).</li>
                                 <li>Analyze which categories have the highest average value.</li>
@@ -321,7 +321,7 @@ jeopardy_data.head(5)
                 </div>
             </section> <!--End ChatGPT-->
 
-            <section class="text-code-section">
+            <section id="most_common_categories" class="text-code-section">
                 <div class="text-code-container">
                     <div class="text-container code">
                         <h2>Most common categories</h2>
@@ -599,8 +599,8 @@ The category count for the top 100 categories differs significantly between roun
                     </div>
                 </div> <!--End text-code-container -->
             </section> <!--End text-code-section-->
-            
-            <section class="text-code-section">
+
+            <section id="time" class="text-code-section">
                 <div class="text-code-container">
                     <div class="text-container code">
                         <h2>Exploring the dataset by year</h2>
@@ -641,7 +641,7 @@ plt.show()
                         <img src="./resources/images/max_median_prize_year_web.svg" alt="">
                     </div>
                     <div class="text-container code">
-                        <h3>What was the most valuable answer? What was the question? And in what category?</h3>
+                        <h3>What was the most valuable question of all time?</h3>
                     </div>
                     <div class="code-container">
                         <details>
@@ -723,7 +723,7 @@ plt.show()
                 </div> <!--End text-code-container -->
             </section> <!--End text-code-section -->
 
-            <section class="text-code-section">
+            <section id="prize" class="text-code-section">
                 <div class="text-code-container">
                     <div class="text-container code">
                         <h3>How are the prize values distributed between the round types Jeopardy and Double Jeopardy for the top 10 categories?</h3>
@@ -761,6 +761,9 @@ plt.show()
                     <div class="image-container">
                         <img src="./resources/images/top_10_categories_prize_distribution_round_web.svg" alt="">
                     </div>
+                    <div class="text-container code">
+                        <p>From the Jeopardy round in the different subplots, we can see that the mean and median are fairly close together, indicated by the green and orange lines. However, for the Double Jeopardy we can see a lot of outliers skewing the mean upwards.</p>
+                    </div>
                 </div> <!--End text-code-section -->
             </section> <!--End text-code-section -->
             
@@ -769,7 +772,7 @@ plt.show()
             <section class="text-code-section">
                 <div class="text-code-container">
                     <div class="text-container code">
-                        <h2>Does some categories have more re-occurring answers than others?</h2>
+                        <h2>Do some categories have more re-occurring answers than others?</h2>
                     </div>
                     <div class="code-container">
                         <details>
@@ -912,7 +915,7 @@ Name: count, dtype: Int64
                             </details>
                         </div><!-- End code-container-->
                         <div class="text-container code">
-                            <p>The most frequent answer to Colleges & Universities questions is "Harvard" with 11 instances.</p>
+                            <p>The most frequent answer to Colleges & Universities questions was "Harvard" with 11 instances.</p>
                         </div>
                 </div> <!--End text-code-container -->
             </section> <!--End text-code-section -->
@@ -1074,7 +1077,7 @@ jeopardy_data[jeopardy_data.answer == "norway"].sort_values(by=['value'], ascend
                 </div> <!-- End text-code-container -->
             </section> <!-- End text-code-section -->
 
-            <section class="text-code-section functions">
+            <section id="functions" class="text-code-section functions">
                 <div class="text-code-container">
                     <div class="text-container code">
                         <h2>Tasks for the Data Science Foundation Skill Path</h2>
@@ -1251,7 +1254,7 @@ The most valuable question was:
                         </details>
                     </div> <!-- End code-container -->
                     <div class="text-container code">
-                        <p>After investigating the words "beer", "coffee" and "cheese", I found that the most valuable question belonged to cheese, the highest average prize value belonged to coffee and there was a question containing the word "beer" in 189 different categories.</p>
+                        <p>After investigating the words "beer", "coffee" and "cheese", I found that the most valuable question belonged to cheese ($6000), the highest average prize value belonged to coffee ($693) and there was 189 different categories with questions involving beer.</p>
                     </div>
                     <div class="text-container code">
                         <h3>Write a function that returns the count of unique answers to all of the questions in a dataset.</h3>
