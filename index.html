@@ -285,7 +285,7 @@ jeopardy_data.head(5)
                 <div class="text-container">
                     <h2>Brainstorm analytical ideas with ChatGPT</h2>
                     <p>Prompt sent: <br>
-                        "Good day! I have a dataset from the TV show Jeopardy that I'm analyzing with Python in Jupyter Notebook. I've loaded the dataset into a pandas dataframe and called it jeopardy_data. Each row is a question. The columns contain 'show_number' (integer), 'air_date' (string of date of air), 'round_type' (what type of round it was, either 'Jeopardy!' 'Double Jeopardy!' 'Final Jeopardy!' 'Tiebreaker'), 'category' (what category the question belongs to), 'value' (price value of the question), 'question' (the question), 'answer' (the answer). Can you brainstorm 5 ideas of how to explore and analyze the dataset?"</p>
+                        "Good day! I have a dataset from the TV show Jeopardy that I'm analyzing with Python in Jupyter Notebook. I've loaded the dataset into a pandas dataframe and called it jeopardy_data. Each row is a question. The columns contain 'show_number' (integer), 'air_date' (string of date of air), 'round_type' (what type of round it was, either 'Jeopardy!' 'Double Jeopardy!' 'Final Jeopardy!' 'Tiebreaker'), 'category' (what category the question belongs to), 'value' (prize value of the question), 'question' (the question), 'answer' (the answer). Can you brainstorm 5 ideas of how to explore and analyze the dataset?"</p>
                     <p>ChatGPT's answer: <br>
                         <ol>
                             <li>Most Common Categories</li>
@@ -331,7 +331,7 @@ jeopardy_data.head(5)
                         <details>
                             <summary>Show code</summary>
 <pre><code class="language-python">
-#count the values in category column, returns a pandas series sorted after heighest count
+#count the values in category column, returns a pandas series sorted after highest count
 category_counts = jeopardy_data["category"].value_counts()
 #extract only the first 10 from the series
 top_10_categories = category_counts.head(10)
@@ -528,41 +528,41 @@ top_100_categories.head(11)
                         <details>
                             <summary>Show code</summary>
     <pre><code class="language-python">
-    #make a plot of the 3 round types with their top 100 occurring categories
-    top_100_sorted_jeopardy = top_100_categories.sort_values(by=['Jeopardy!'], ascending=False)
-    top_100_sorted_double = top_100_categories.sort_values(by=["Double Jeopardy!"], ascending=False)
-    top_100_sorted_final = top_100_categories.sort_values(by=["Final Jeopardy!"], ascending=False)
-    #make a list of the three dataframes for looping
-    top_100_cat_variables_list = [top_100_sorted_jeopardy, top_100_sorted_double, top_100_sorted_final]
-    
-    fig = plt.figure(figsize=(18,18))
-    fig.suptitle("Top 100 Categories in the TV show Jeopardy!\n 10 most frequent categories colorized", fontsize=22, y=0.96)
-    fig.supylabel("Frequency", fontsize=13)
-    
-    for i, round_type in enumerate(top_100_cat_variables_list):
-        plt.subplot(3,1,i+1)
-        legend_patches = []
-        subplot = plt.bar(top_100_cat_variables_list[i].iloc[:,i].index, \
-                            top_100_cat_variables_list[i].iloc[:,i].values, color=top_100_cat_variables_list[i].iloc[:,4])
-        max_height = 0 #to adjust the y-axis for each subplot
-        for bar in subplot: #loop through each bar in the current plot
-            if bar.get_height() > max_height:
-                max_height = bar.get_height() #find and save the height of the heighest bar in each subplot
-            xlabels = [tick.get_text() for tick in plt.gca().get_xticklabels()] #get the tick labels as a list of category names for the current subplot
-            category_index = round(bar.get_x()) #get the x-coordinates of the bar on the x-axis
-            if 0 <= category_index <= len(xlabels): #if x-coordinate of the current bar is somewhere along the x-axis:
-                category_name = xlabels[category_index] #get the current x-label/category name
-                if category_name in list(top_10_categories_list) and bar.get_height() > 0: #make a legend patch if the current x-label is in top 10 list AND if the current round has a question in that category
-                    patch = mpatches.Patch(color=bar.get_facecolor(), label=category_name)
-                    legend_patches.append(patch)
-            plt.ylim((0, max_height + (max_height*20/100))) #increase y-axis by 20% in each subplot
-        plt.legend(handles=legend_patches, title=f"{len(legend_patches)} most frequent categories", loc="upper right", fontsize="small")
-        plt.title(f"Round type: {top_100_cat_variables_list[i].iloc[:,i].name}", fontsize=15, pad=10)
-        plt.xticks(rotation=90, fontsize=11)
-        plt.xlim((-1,100))
-        plt.subplots_adjust(hspace=1.125, left=0.06, right=0.9)
-    
-    plt.show()
+#make a plot of the 3 round types with their top 100 occurring categories
+top_100_sorted_jeopardy = top_100_categories.sort_values(by=['Jeopardy!'], ascending=False)
+top_100_sorted_double = top_100_categories.sort_values(by=["Double Jeopardy!"], ascending=False)
+top_100_sorted_final = top_100_categories.sort_values(by=["Final Jeopardy!"], ascending=False)
+#make a list of the three dataframes for looping
+top_100_cat_variables_list = [top_100_sorted_jeopardy, top_100_sorted_double, top_100_sorted_final]
+
+fig = plt.figure(figsize=(18,18))
+fig.suptitle("Top 100 Categories in the TV show Jeopardy!\n 10 most frequent categories colorized", fontsize=22, y=0.96)
+fig.supylabel("Frequency", fontsize=13)
+
+for i, round_type in enumerate(top_100_cat_variables_list):
+    plt.subplot(3,1,i+1)
+    legend_patches = []
+    subplot = plt.bar(top_100_cat_variables_list[i].iloc[:,i].index, \
+                        top_100_cat_variables_list[i].iloc[:,i].values, color=top_100_cat_variables_list[i].iloc[:,4])
+    max_height = 0 #to adjust the y-axis for each subplot
+    for bar in subplot: #loop through each bar in the current plot
+        if bar.get_height() > max_height:
+            max_height = bar.get_height() #find and save the height of the highest bar in each subplot
+        xlabels = [tick.get_text() for tick in plt.gca().get_xticklabels()] #get the tick labels as a list of category names for the current subplot
+        category_index = round(bar.get_x()) #get the x-coordinates of the bar on the x-axis
+        if 0 <= category_index <= len(xlabels): #if x-coordinate of the current bar is somewhere along the x-axis:
+            category_name = xlabels[category_index] #get the current x-label/category name
+            if category_name in list(top_10_categories_list) and bar.get_height() > 0: #make a legend patch if the current x-label is in top 10 list AND if the current round has a question in that category
+                patch = mpatches.Patch(color=bar.get_facecolor(), label=category_name)
+                legend_patches.append(patch)
+        plt.ylim((0, max_height + (max_height*20/100))) #increase y-axis by 20% in each subplot
+    plt.legend(handles=legend_patches, title=f"{len(legend_patches)} most frequent categories", loc="upper right", fontsize="small")
+    plt.title(f"Round type: {top_100_cat_variables_list[i].iloc[:,i].name}", fontsize=15, pad=10)
+    plt.xticks(rotation=90, fontsize=11)
+    plt.xlim((-1,100))
+    plt.subplots_adjust(hspace=1.125, left=0.06, right=0.9)
+
+plt.show()
     </code></pre>
                         </details>
                     </div>  <!--End code-container -->
@@ -591,14 +591,14 @@ if chi2_category_count[1] < 0.05:
     print(f"The category count for the top 100 categories differs significantly between rounds. P-value: {round(chi2_category_count[1], 3)}")
 else:
     print("No significance was found")
+</code></pre>
 <pre><code class="language-plaintext">
 The category count for the top 100 categories differs significantly between rounds. P-value: 0.0
-</code></pre>
 </code></pre>
                         </details>
                     </div> <!--End code-container -->
                     <div class="text-container code">
-                        <p>The probalility for the difference being attributed to random chance is below 5%. Therefore we can conclude that yes, there is indeed a difference how often the different categories appear in each round.</p>
+                        <p>The probability for the observed difference being attributed to random chance is below 5%. Therefore we can conclude that yes, there is indeed a difference how often the various categories appear in each round.</p>
                     </div>
                 </div> <!--End text-code-container -->
             </section> <!--End text-code-section -->
@@ -606,7 +606,7 @@ The category count for the top 100 categories differs significantly between roun
             <section class="text-code-section">
                 <div class="text-code-container">
                     <div class="text-container code">
-                        <h3>Is there a difference in the prize value between the round types Jeopardy and Double Jeopardy?</h3>
+                        <h3>How are the prize values distributed between the round types Jeopardy and Double Jeopardy for the top 10 categories?</h3>
                     </div>
                     <div class="code-container">
                         <details>
@@ -640,23 +640,6 @@ plt.show()
                     </div> <!--End code-container -->
                     <div class="image-container">
                         <img src="./resources/images/top_10_categories_prize_distribution_round_web.svg" alt="">
-                    </div>
-                    <div class="text-container code">
-                    <h3>Is there a difference in the mean prize value between Jeopardy and Double Jeopardy rounds?</h3>
-                    </div>
-                    <div class="code-container">
-                        <details>
-                            <summary>Show code</summary>
-<pre><code class="language-python">
-
-<pre><code class="language-plaintext">
-
-</code></pre>
-</code></pre>
-                        </details>
-                    </div> <!--End code-container -->
-                    <div class="text-container code">
-                        <p>The probalility for the difference being attributed to random chance is below 5%. Therefore we can conclude that yes, there is indeed a difference in prize value between the two rounds.</p>
                     </div>
                 </div> <!--End text-code-section -->
             </section> <!--End text-code-section -->
@@ -912,6 +895,25 @@ plt.show()
                     </div><!-- End code-container-->
                         <div class="image-container">
                             <img src="./resources/images/top_100_categories_duplicate_answer_percent_web.svg" alt="">
+                        </div>
+                        <div class="text-container code">
+                            <p>From the graph we can tell that the category State Capitals has the highest count of non-unique answers. Among the top 10 occurring categories Colleges And Universities have the highest, with 38% of the answers being non-unique (meaning that the same answer appears at least twice), while the category Before And After only have 1% of the answers as non-unique.</p>
+                        </div>
+                        <div class="code-container">
+                            <details>
+                                <summary>Show code</summary>
+<pre><code class="language-python">
+jeopardy_data[jeopardy_data.category == "COLLEGES & UNIVERSITIES"].sort_values(by=["answer"])["answer"].value_counts().head(1)
+</code></pre>
+<pre><code class="language-plaintext">
+answer
+harvard    11
+Name: count, dtype: Int64
+</code></pre>
+                            </details>
+                        </div><!-- End code-container-->
+                        <div class="text-container code">
+                            <p>The most frequent answer to Colleges & Universities questions is "Harvard" with 11 instances.</p>
                         </div>
                 </div> <!--End text-code-container -->
             </section> <!--End text-code-section -->
@@ -1250,7 +1252,7 @@ The most valuable question was:
                         </details>
                     </div> <!-- End code-container -->
                     <div class="text-container code">
-                        <p>After investigating the words "beer", "coffee" and "cheese", I found that the most valuable question belonged to cheese, the highest average prize value belonged to coffee and beer there was a question about beer in 189 different categories.</p>
+                        <p>After investigating the words "beer", "coffee" and "cheese", I found that the most valuable question belonged to cheese, the highest average prize value belonged to coffee and there was a question containing the word "beer" in 189 different categories.</p>
                     </div>
                     <div class="text-container code">
                         <h3>Write a function that returns the count of unique answers to all of the questions in a dataset.</h3>
@@ -1260,22 +1262,10 @@ The most valuable question was:
                             <summary>Show code</summary>
 <pre><code class="language-python">
 def count_unique_answers(filtered_dataframe):
-return filtered_dataframe["answer"].value_counts()
+    return filtered_dataframe["answer"].value_counts()
 
 filter_question_david_lynch = question_search(["david", "lynch"])
 count_unique_answers(filter_question_david_lynch)
-</code></pre>
-<pre><code class="language-plaintext">
-answer
-dune                2
-twin peaks          2
-blue velvet         1
-eraserhead          1
-mulholland drive    1
-the elephant man    1
-laura palmer        1
-wild at heart       1
-Name: count, dtype: Int64
 </code></pre>
                         </details>
                     </div> <!-- End code-container -->
