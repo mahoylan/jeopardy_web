@@ -188,3 +188,7 @@ footer {
     background-color: #1f234a;
     color: white;
 }
+
+footer p > a {
+    color: white;
+}
