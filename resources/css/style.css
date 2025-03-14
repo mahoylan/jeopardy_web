@@ -41,9 +41,9 @@ p, ul {
 }
 
 .text-only-section {
-    /* display: flex; */
+    display: flex;
     padding-top: 1rem;
-    justify-self: center;
+    margin: auto;
     margin-bottom: 1rem;
     border-radius: 10px;
     background-color: #e2ebff;
@@ -135,9 +135,8 @@ every other row is gray */
 .table-container {
     padding: 1rem 0;
     max-width: 100%;
-    display: flex;
-    justify-self: center;
-    margin: 0 1rem;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .table-container > samp {
@@ -147,6 +146,9 @@ every other row is gray */
 
 table {
     background-color: white;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 10px;
 }
 
 .table-container > samp {
